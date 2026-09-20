@@ -25,15 +25,15 @@ const CATEGORIAS = [
 ]
 
 const COLOR = {
-  fondo1: new Color("#161B22"),
-  fondo2: new Color("#0E1116"),
-  mint:   new Color("#4ADE9B"),
-  brass:  new Color("#D9A441"),
-  coral:  new Color("#F2706B"),
-  texto:  new Color("#F0F3F8"),
-  tenue:  new Color("#8A94A6"),
-  track:  new Color("#1D2430"),
-  chip:   new Color("#1D2430")
+  fondo1: new Color("#132640"),
+  fondo2: new Color("#0C1A2C"),
+  mint:   new Color("#8CC2FF"),
+  brass:  new Color("#E9C98E"),
+  coral:  new Color("#F2877B"),
+  texto:  new Color("#F5ECDC"),
+  tenue:  new Color("#A9B6C8"),
+  track:  new Color("#1B3252"),
+  chip:   new Color("#1B3252")
 }
 
 const MESES = ["enero","febrero","marzo","abril","mayo","junio",
@@ -262,7 +262,7 @@ function crearWidget(familia) {
     const fila = w.addStack(); fila.layoutHorizontally(); fila.spacing = 5
     for (const c of CATEGORIAS) chip(fila, c)
     const ia = fila.addStack()
-    ia.backgroundColor = new Color("#1F3A2E"); ia.cornerRadius = 9; ia.setPadding(6, 8, 6, 8)
+    ia.backgroundColor = new Color("#274A78"); ia.cornerRadius = 9; ia.setPadding(6, 8, 6, 8)
     ia.url = (APP_URL || "") + "?ia=1"
     const it = ia.addText("✦"); it.font = Font.boldSystemFont(11); it.textColor = COLOR.mint
   }
@@ -343,7 +343,7 @@ async function pantalla() {
   esp(20)
 
   const rb = new UITableRow(); rb.height = 62; rb.dismissOnSelect = false
-  rb.backgroundColor = new Color("#1D2430")
+  rb.backgroundColor = new Color("#1B3252")
   const cb = rb.addText("＋   Registrar gasto")
   cb.titleFont = Font.boldSystemFont(20); cb.centerAligned()
   rb.onSelect = async () => {

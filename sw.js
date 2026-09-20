@@ -2,7 +2,7 @@
    Guarda la app en el teléfono para que abra sin internet.
    Sube el número de CACHE cada vez que publiques una versión nueva. */
 
-var CACHE = 'dinero-v7';
+var CACHE = 'dinero-v8';
 var ARCHIVOS = ['./', './index.html', './manifest.json', './icon.png'];
 
 self.addEventListener('install', function (e) {

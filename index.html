@@ -12,7 +12,7 @@
 <link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..800&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap">
 <style>
 :root{
   --ink:#0E1116;--surf:#161B22;--surf-2:#1D2430;--line:#242C39;
@@ -24,10 +24,10 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%}
 body{margin:0;background:var(--ink);color:var(--text);
-  font-family:"Public Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-family:"DM Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overscroll-behavior-y:none}
-.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
-h1,h2,h3{font-family:"Archivo",sans-serif;margin:0;font-weight:600;letter-spacing:-.015em}
+.mono{font-family:"DM Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+h1,h2,h3{font-family:"Fraunces",sans-serif;margin:0;font-weight:600;letter-spacing:-.015em}
 button{font:inherit;color:inherit;background:none;border:none;padding:0;cursor:pointer}
 button:focus-visible{outline:2px solid var(--mint);outline-offset:2px;border-radius:8px}
 
@@ -35,7 +35,7 @@ button:focus-visible{outline:2px solid var(--mint);outline-offset:2px;border-rad
 header{padding:calc(var(--safe-t) + 14px) 18px 12px;display:flex;align-items:center;gap:12px;
   border-bottom:1px solid var(--line);background:var(--ink);position:relative;z-index:5}
 header h1{font-size:19px;flex:1}
-#sync{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.06em;color:var(--dim-2);
+#sync{font-family:"DM Mono",monospace;font-size:10.5px;letter-spacing:.06em;color:var(--dim-2);
   display:flex;align-items:center;gap:6px}
 #sync .dot{width:7px;height:7px;border-radius:50%;background:var(--dim-2);flex:none}
 #sync.ok .dot{background:var(--mint)} #sync.pend .dot{background:var(--brass)} #sync.err .dot{background:var(--coral)}
@@ -54,14 +54,14 @@ nav button.on{color:var(--text)}
 #fab:active{transform:scale(.94)}
 
 .hero{padding:28px 0 4px;text-align:center}
-.hero .cifra{font-family:"Archivo",sans-serif;font-weight:700;font-size:clamp(50px,16vw,70px);line-height:1;
+.hero .cifra{font-family:"Fraunces",sans-serif;font-weight:700;font-size:clamp(50px,16vw,70px);line-height:1;
   letter-spacing:-.04em;font-variant-numeric:tabular-nums}
 .cifra.v,.v{color:var(--mint)} .cifra.a,.a{color:var(--brass)} .cifra.r,.r{color:var(--coral)}
 .hero .pie{color:var(--dim);font-size:14.5px;margin-top:8px}
 .barra{height:9px;border-radius:5px;background:var(--surf-2);overflow:hidden;margin:18px 0 9px;display:flex}
 .barra i{display:block;height:100%;transition:width .35s ease}
 .reinicio{font-size:12px;color:var(--dim-2);text-align:center}
-.rotulo{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+.rotulo{font-family:"DM Mono",monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
   color:var(--dim-2);font-weight:600;margin:28px 0 10px;display:flex;justify-content:space-between;align-items:center;gap:10px}
 .rotulo span:last-child{letter-spacing:.04em;text-transform:none}
 .lista{background:var(--surf);border-radius:var(--r);overflow:hidden}
@@ -72,7 +72,7 @@ nav button.on{color:var(--text)}
 .row .tx{min-width:0}
 .row .tx b{display:block;font-weight:500;font-size:15.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .row .tx small{display:block;color:var(--dim-2);font-size:11.5px;margin-top:1px}
-.row .mt{font-weight:600;font-size:15px;white-space:nowrap;font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums}
+.row .mt{font-weight:600;font-size:15px;white-space:nowrap;font-family:"DM Mono",monospace;font-variant-numeric:tabular-nums}
 .row.hecho .tx b,.row.hecho .mt{color:var(--dim-2)}
 .mt.pos{color:var(--mint)} .mt.mal{color:var(--coral)}
 button.row:active{background:var(--surf-2)}
@@ -87,7 +87,7 @@ details[open]>summary .ic{transform:rotate(90deg)}
 
 .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:6px}
 .tile{background:var(--surf);border-radius:var(--r);padding:13px 8px;text-align:center}
-.tile b{display:block;font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;font-size:16px;font-weight:600}
+.tile b{display:block;font-family:"DM Mono",monospace;font-variant-numeric:tabular-nums;font-size:16px;font-weight:600}
 .tile small{display:block;color:var(--dim-2);font-size:11px;margin-top:3px}
 .nota{color:var(--dim-2);font-size:12.5px;text-align:center;margin-top:12px}
 .vacio{padding:24px 16px;text-align:center;color:var(--dim-2);font-size:14px}
@@ -109,19 +109,19 @@ details[open]>summary .ic{transform:rotate(90deg)}
 .chip{background:var(--surf-2);border-radius:20px;padding:7px 12px;font-size:13px;font-weight:600}
 .chip.v{background:rgba(74,222,155,.14);color:var(--mint)}
 .chip:active{filter:brightness(1.3)}
-.cab-cerebro{display:flex;align-items:center;gap:8px;font-family:"IBM Plex Mono",monospace;font-size:10.5px;
+.cab-cerebro{display:flex;align-items:center;gap:8px;font-family:"DM Mono",monospace;font-size:10.5px;
   letter-spacing:.16em;text-transform:uppercase;color:var(--dim-2);font-weight:600;margin-top:26px}
 .cab-cerebro i{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 10px var(--mint)}
 
 .graf{background:var(--surf);border-radius:var(--r);padding:14px 12px 8px}
 .graf svg{display:block;width:100%;height:auto}
-.graf text{font-family:"IBM Plex Mono",monospace;font-size:10px;fill:var(--dim-2)}
+.graf text{font-family:"DM Mono",monospace;font-size:10px;fill:var(--dim-2)}
 .leyenda{display:flex;flex-wrap:wrap;gap:6px 14px;padding:8px 4px 4px;font-size:12px;color:var(--dim)}
 .leyenda span{display:flex;align-items:center;gap:6px}
 .leyenda i{width:9px;height:9px;border-radius:3px;display:inline-block}
 .dona{display:grid;grid-template-columns:132px 1fr;gap:14px;align-items:center}
 .caja{background:var(--surf);border-radius:var(--r);padding:16px}
-.caja .big{font-family:"Archivo",sans-serif;font-weight:700;font-size:34px;letter-spacing:-.03em;line-height:1.1;font-variant-numeric:tabular-nums}
+.caja .big{font-family:"Fraunces",sans-serif;font-weight:700;font-size:34px;letter-spacing:-.03em;line-height:1.1;font-variant-numeric:tabular-nums}
 .caja small{color:var(--dim-2);font-size:12.5px;display:block}
 
 /* hojas */
@@ -134,11 +134,11 @@ details[open]>summary .ic{transform:rotate(90deg)}
 .hoja h3{font-size:18px;margin:2px 0 12px}
 #pad .cab{display:flex;align-items:baseline;gap:10px;margin-bottom:6px}
 #pad .cab small{color:var(--dim-2);font-size:12.5px;flex:1;text-align:right}
-#monto{font-family:"Archivo",sans-serif;font-weight:700;font-size:44px;line-height:1.1;letter-spacing:-.03em;
+#monto{font-family:"Fraunces",sans-serif;font-weight:700;font-size:44px;line-height:1.1;letter-spacing:-.03em;
   font-variant-numeric:tabular-nums;min-height:52px}
 #monto.cero{color:var(--dim-2)}
 .teclas{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0 10px}
-.teclas button{background:var(--surf-2);border-radius:12px;height:52px;font-family:"IBM Plex Mono",monospace;font-size:22px;font-weight:500}
+.teclas button{background:var(--surf-2);border-radius:12px;height:52px;font-family:"DM Mono",monospace;font-size:22px;font-weight:500}
 .teclas button:active{background:#2A3441}
 .cats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .cats button{background:var(--surf-2);border-radius:12px;padding:10px 4px;font-size:12px;font-weight:600;
@@ -151,14 +151,14 @@ details[open]>summary .ic{transform:rotate(90deg)}
 .dias button.on{background:var(--text);color:var(--ink)}
 
 .campo{background:var(--surf-2);border-radius:12px;padding:11px 13px;margin-top:8px}
-.campo label{display:block;font-size:10.5px;color:var(--dim-2);margin-bottom:5px;font-family:"IBM Plex Mono",monospace;
+.campo label{display:block;font-size:10.5px;color:var(--dim-2);margin-bottom:5px;font-family:"DM Mono",monospace;
   letter-spacing:.1em;text-transform:uppercase}
 .campo input,.campo select{width:100%;background:var(--ink);border:1px solid var(--line);border-radius:10px;padding:11px;
-  color:var(--text);font-family:"IBM Plex Mono",monospace;font-size:15px;-webkit-appearance:none;appearance:none}
+  color:var(--text);font-family:"DM Mono",monospace;font-size:15px;-webkit-appearance:none;appearance:none}
 .campo input:focus,.campo select:focus{outline:none;border-color:var(--mint)}
 .lista .campo{background:var(--surf);margin:0;border-radius:0}
 .btn{display:block;width:100%;background:var(--mint);color:#08130D;border-radius:12px;padding:15px;text-align:center;
-  font-weight:600;font-size:16px;margin-top:12px;font-family:"Archivo",sans-serif}
+  font-weight:600;font-size:16px;margin-top:12px;font-family:"Fraunces",sans-serif}
 .btn.gris{background:var(--surf-2);color:var(--text)}
 .btn.rojo{background:transparent;color:var(--coral);border:1px solid rgba(242,112,107,.4)}
 .btn:active{filter:brightness(.92)}
@@ -175,8 +175,8 @@ details[open]>summary .ic{transform:rotate(90deg)}
 #chat{position:fixed;inset:0;z-index:50;background:var(--ink);display:flex;flex-direction:column;transform:translateX(102%);transition:transform .28s cubic-bezier(.22,1,.36,1)}
 #chat.on{transform:none}
 .chat-cab{display:flex;align-items:center;gap:8px;padding:calc(var(--safe-t) + 12px) 14px 12px;border-bottom:1px solid var(--line)}
-.chat-cab b{font-family:"Archivo",sans-serif;font-size:17px}
-.chat-cab small{display:block;font-size:10.5px;color:var(--dim-2);font-family:"IBM Plex Mono",monospace}
+.chat-cab b{font-family:"Fraunces",sans-serif;font-size:17px}
+.chat-cab small{display:block;font-size:10.5px;color:var(--dim-2);font-family:"DM Mono",monospace}
 .chat-x{color:var(--mint);font-size:14.5px;width:74px}
 #chatMsgs{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 14px 20px;display:flex;flex-direction:column;gap:10px}
 .burbuja{max-width:88%;padding:11px 14px;border-radius:18px;font-size:15px;line-height:1.45;word-wrap:break-word}
@@ -1774,5 +1774,70 @@ $("#iaTxt").addEventListener("keydown",function(e){if(e.key==="Enter"&&!e.shiftK
 try{if(new URLSearchParams(location.search).get("ia"))abrirChat()}catch(e){}
 if("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(function(){});
 </script>
+<!-- AVISO_VERSION_NUEVA: avisa cuando hay una versión publicada más nueva que la que está abierta -->
+<script>
+(function(){
+  try{ if(window.top!==window.self) return; }catch(e){ return; }
+  var PREFIJO_CACHE = 'dinero-';           // cajas propias de esta app que se pueden tirar
+  var CLAVE = 'aviso_ver_' + location.pathname;
+  var ultima = 0, mostrado = false;
+  function tamLocal(){
+    try{ var n = performance.getEntriesByType('navigation')[0]; return n && n.decodedBodySize ? n.decodedBodySize : 0; }catch(e){ return 0; }
+  }
+  function tamServidor(r){
+    var et = r.headers.get('etag') || '';
+    var m = et.match(/-([0-9a-f]+)"?$/i);
+    return m ? parseInt(m[1],16) : 0;
+  }
+  function revisar(){
+    if(mostrado || !navigator.onLine) return;
+    var ahora = Date.now(); if(ahora - ultima < 60000) return; ultima = ahora;
+    try{ if(+sessionStorage.getItem('aviso_callar') > ahora) return; }catch(e){}
+    fetch(location.pathname, {method:'HEAD', cache:'no-store'}).then(function(r){
+      if(!r.ok) return;
+      var srv = tamServidor(r); if(!srv) return;
+      var loc = tamLocal(), base = loc;
+      if(!base){
+        try{ base = +localStorage.getItem(CLAVE) || 0; if(!base){ localStorage.setItem(CLAVE, srv); return; } }catch(e){ return; }
+      }
+      if(srv !== base) pintar(srv);
+    }).catch(function(){});
+  }
+  function actualizar(srv){
+    try{ localStorage.setItem(CLAVE, srv); sessionStorage.setItem('aviso_callar', Date.now()+5*60000); }catch(e){}
+    var pasos = [];
+    if('serviceWorker' in navigator){
+      pasos.push(navigator.serviceWorker.getRegistrations().then(function(rs){ return Promise.all(rs.map(function(g){ return g.update().catch(function(){}); })); }).catch(function(){}));
+    }
+    if(PREFIJO_CACHE && window.caches){
+      pasos.push(caches.keys().then(function(ks){ return Promise.all(ks.filter(function(k){ return k.indexOf(PREFIJO_CACHE)===0; }).map(function(k){ return caches.delete(k); })); }).catch(function(){}));
+    }
+    pasos.push(fetch(location.href, {cache:'reload'}).catch(function(){}));
+    Promise.all(pasos).then(function(){ location.reload(); });
+    setTimeout(function(){ location.reload(); }, 4000);
+  }
+  function pintar(srv){
+    mostrado = true;
+    var b = document.createElement('div');
+    b.id = 'aviso-version';
+    b.setAttribute('role','status');
+    b.style.cssText = 'position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom));'+
+      'z-index:2147483000;display:flex;align-items:center;gap:12px;background:#0E2A5C;color:#F2F7FF;'+
+      'padding:10px 10px 10px 16px;border-radius:999px;box-shadow:0 8px 28px rgba(8,20,48,.35);'+
+      'font:500 14px/1.2 "DM Sans",system-ui,-apple-system,sans-serif;max-width:calc(100vw - 24px);white-space:nowrap';
+    b.innerHTML = '<span>Hay una versión nueva</span>'+
+      '<button type="button" style="font:inherit;font-weight:700;border:0;border-radius:999px;padding:8px 14px;background:#6FA0FF;color:#0A1D40;cursor:pointer">Actualizar</button>'+
+      '<button type="button" aria-label="Ahora no" style="font:inherit;border:0;background:none;color:#BCD3FF;font-size:18px;padding:0 6px;cursor:pointer">×</button>';
+    var bs = b.querySelectorAll('button');
+    bs[0].onclick = function(){ bs[0].textContent = 'Cargando…'; actualizar(srv); };
+    bs[1].onclick = function(){ b.remove(); mostrado = false; try{ sessionStorage.setItem('aviso_callar', Date.now()+30*60000); }catch(e){} };
+    document.body.appendChild(b);
+  }
+  setTimeout(revisar, 3000);
+  document.addEventListener('visibilitychange', function(){ if(document.visibilityState==='visible') revisar(); });
+  window.addEventListener('focus', revisar);
+})();
+</script>
+
 </body>
 </html>

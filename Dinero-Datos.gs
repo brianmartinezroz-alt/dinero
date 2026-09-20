@@ -327,54 +327,125 @@ function filaDe(hoja, id) {
 }
 
 /* =====================================================================
-   ✦ IA — el cerebro de la app le pregunta a Claude por aquí.
-   Tu llave vive en: Configuración del proyecto → Propiedades de secuencia
-   de comandos → ANTHROPIC_API_KEY. Nunca sale de Google.
-   Opcional: MODELO_IA (por defecto claude-sonnet-5; más barato:
-   claude-haiku-4-5-20251001).
+   ✦ IA — el cerebro de la app le pregunta a una IA por aquí.
+   Gratis: Google Gemini. Pon tu llave en
+   Configuración del proyecto → Propiedades de secuencia de comandos:
+       GEMINI_API_KEY = (tu llave de aistudio.google.com)
+   Opcional: MODELO_IA (por ejemplo gemini-2.5-flash).
+   Si algún día pones ANTHROPIC_API_KEY, usa Claude en su lugar (de paga).
    ===================================================================== */
-var MODELO_POR_DEFECTO = 'claude-sonnet-5';
+var MODELOS_GEMINI = ['gemini-3.5-flash', 'gemini-flash-latest', 'gemini-2.5-flash', 'gemini-2.5-flash-lite'];
+var MODELO_CLAUDE = 'claude-sonnet-5';
 
 function preguntarIA(d) {
   var props = PropertiesService.getScriptProperties();
-  var llave = props.getProperty('ANTHROPIC_API_KEY');
-  if (!llave) return { ok: false, error: 'Falta la llave ANTHROPIC_API_KEY en las propiedades del Apps Script' };
-  var modelo = props.getProperty('MODELO_IA') || MODELO_POR_DEFECTO;
   if (!d.mensajes || !d.mensajes.length) return { ok: false, error: 'No hay mensaje' };
+  if (props.getProperty('ANTHROPIC_API_KEY')) return preguntarClaude(d, props);
+  if (props.getProperty('GEMINI_API_KEY')) return preguntarGemini(d, props);
+  return { ok: false, error: 'Falta la llave GEMINI_API_KEY en las propiedades del Apps Script' };
+}
 
-  var cuerpo = {
-    model: modelo,
-    max_tokens: 2000,
-    system: String(d.sistema || '').slice(0, 20000),
-    messages: d.mensajes.slice(-12)
+/* ---------- Gemini (gratis) ---------- */
+// Convierte el esquema de la herramienta al formato que pide Gemini.
+function esquemaGemini(x) {
+  if (!x || typeof x !== 'object') return x;
+  var o = {};
+  if (x.type) o.type = String(x.type).toUpperCase();
+  if (x.description) o.description = x.description;
+  if (x.enum) o.enum = x.enum;
+  if (x.required) o.required = x.required;
+  if (x.items) o.items = esquemaGemini(x.items);
+  if (x.properties) { o.properties = {}; for (var k in x.properties) o.properties[k] = esquemaGemini(x.properties[k]); }
+  return o;
+}
+
+function contenidosGemini(mensajes) {
+  return mensajes.slice(-12).map(function (m) {
+    var partes = [];
+    if (typeof m.content === 'string') partes.push({ text: m.content });
+    else (m.content || []).forEach(function (b) {
+      if (b.type === 'text') partes.push({ text: b.text });
+      if (b.type === 'image' && b.source) partes.push({ inlineData: { mimeType: b.source.media_type, data: b.source.data } });
+    });
+    return { role: m.role === 'assistant' ? 'model' : 'user', parts: partes };
+  });
+}
+
+function llamarGemini(modelo, llave, cuerpo) {
+  var r = UrlFetchApp.fetch('https://generativelanguage.googleapis.com/v1beta/models/' + modelo + ':generateContent', {
+    method: 'post', contentType: 'application/json',
+    headers: { 'x-goog-api-key': llave },
+    payload: JSON.stringify(cuerpo), muteHttpExceptions: true
+  });
+  var j = null; try { j = JSON.parse(r.getContentText()); } catch (e) {}
+  return { codigo: r.getResponseCode(), j: j };
+}
+
+function preguntarGemini(d, props) {
+  var llave = props.getProperty('GEMINI_API_KEY');
+  var elegido = props.getProperty('MODELO_IA');
+  var modelos = elegido ? [elegido].concat(MODELOS_GEMINI) : MODELOS_GEMINI.slice();
+  var sistema = String(d.sistema || '').slice(0, 20000);
+  if (d.herramienta) sistema += '\n\nFORMATO: contesta SOLO con un objeto JSON {"respuesta": "...", "acciones": [...]} según el esquema.';
+  var base = {
+    systemInstruction: { parts: [{ text: sistema }] },
+    contents: contenidosGemini(d.mensajes),
+    generationConfig: { maxOutputTokens: 2500, temperature: 0.4, responseMimeType: 'application/json' }
   };
+  var conEsquema = JSON.parse(JSON.stringify(base));
+  if (d.herramienta && d.herramienta.input_schema) conEsquema.generationConfig.responseSchema = esquemaGemini(d.herramienta.input_schema);
+
+  var ultimo = '';
+  for (var i = 0; i < modelos.length; i++) {
+    var m = modelos[i];
+    var r = llamarGemini(m, llave, conEsquema);
+    if (r.codigo === 400) r = llamarGemini(m, llave, base);          // por si no le gustó el esquema
+    if (r.codigo === 404) { ultimo = 'modelo ' + m + ' no existe'; continue; }  // prueba el siguiente
+    if (r.codigo === 429) return { ok: false, error: 'Llegaste al límite gratis de la IA por ahora. Intenta en un rato.' };
+    if (r.codigo === 400 || r.codigo === 403) {
+      var em = (r.j && r.j.error && r.j.error.message) || ('la IA contestó ' + r.codigo);
+      if (/API key/i.test(em)) em = 'La llave de Gemini no es válida (revisa GEMINI_API_KEY)';
+      return { ok: false, error: em };
+    }
+    if (r.codigo !== 200 || !r.j) { ultimo = 'la IA contestó ' + r.codigo; continue; }
+
+    var c = (r.j.candidates || [])[0];
+    var texto = '';
+    ((c && c.content && c.content.parts) || []).forEach(function (p) { if (p.text && !p.thought) texto += p.text; });
+    var salida = null;
+    try { salida = JSON.parse(texto.replace(/^```(json)?/i, '').replace(/```\s*$/, '')); } catch (e) {}
+    if (!salida || typeof salida !== 'object') salida = { respuesta: texto || '(sin respuesta)', acciones: [] };
+    if (!Array.isArray(salida.acciones)) salida.acciones = [];
+    var u = r.j.usageMetadata || {};
+    return { ok: true, r: salida, modelo: m,
+             uso: { input_tokens: u.promptTokenCount || 0, output_tokens: u.candidatesTokenCount || 0 } };
+  }
+  return { ok: false, error: 'No pude usar ningún modelo de Gemini (' + ultimo + ')' };
+}
+
+/* ---------- Claude (de paga, opcional) ---------- */
+function preguntarClaude(d, props) {
+  var llave = props.getProperty('ANTHROPIC_API_KEY');
+  var modelo = props.getProperty('MODELO_IA') || MODELO_CLAUDE;
+  var cuerpo = { model: modelo, max_tokens: 2000, system: String(d.sistema || '').slice(0, 20000), messages: d.mensajes.slice(-12) };
   if (d.herramienta && d.herramienta.name) {
     cuerpo.tools = [d.herramienta];
     cuerpo.tool_choice = { type: 'tool', name: d.herramienta.name };
   }
-
   var r = UrlFetchApp.fetch('https://api.anthropic.com/v1/messages', {
-    method: 'post',
-    contentType: 'application/json',
+    method: 'post', contentType: 'application/json',
     headers: { 'x-api-key': llave, 'anthropic-version': '2023-06-01' },
-    payload: JSON.stringify(cuerpo),
-    muteHttpExceptions: true
+    payload: JSON.stringify(cuerpo), muteHttpExceptions: true
   });
-  var codigo = r.getResponseCode();
-  var j;
-  try { j = JSON.parse(r.getContentText()); } catch (err) { j = null; }
+  var codigo = r.getResponseCode(), j = null;
+  try { j = JSON.parse(r.getContentText()); } catch (err) {}
   if (codigo !== 200 || !j) {
     var msg = (j && j.error && j.error.message) ? j.error.message : ('la IA contestó ' + codigo);
-    if (codigo === 401) msg = 'La llave de la IA no es válida (revisa ANTHROPIC_API_KEY)';
-    if (codigo === 400 && /credit/i.test(msg)) msg = 'Tu cuenta de la API no tiene saldo. Recarga en console.anthropic.com → Billing';
+    if (codigo === 401) msg = 'La llave de Claude no es válida (revisa ANTHROPIC_API_KEY)';
     return { ok: false, error: msg };
   }
-
   var salida = null, texto = '';
-  (j.content || []).forEach(function (b) {
-    if (b.type === 'tool_use') salida = b.input;
-    if (b.type === 'text') texto += b.text;
-  });
+  (j.content || []).forEach(function (b) { if (b.type === 'tool_use') salida = b.input; if (b.type === 'text') texto += b.text; });
   if (!salida) salida = { respuesta: texto || '(sin respuesta)', acciones: [] };
   return { ok: true, r: salida, uso: j.usage, modelo: modelo };
 }
@@ -382,8 +453,8 @@ function preguntarIA(d) {
 // Córrela UNA vez desde el editor para dar permiso de conectarse a la IA.
 function probarIA() {
   var r = preguntarIA({
-    sistema: 'Contesta en una línea.',
-    mensajes: [{ role: 'user', content: 'Di: «El cerebro de Dinero está conectado».' }]
+    sistema: 'Contesta con JSON {"respuesta": "...", "acciones": []}.',
+    mensajes: [{ role: 'user', content: 'Pon en respuesta: «El cerebro de Dinero está conectado».' }]
   });
   Logger.log(JSON.stringify(r));
 }

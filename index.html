@@ -1478,13 +1478,13 @@ function aplicarAcciones(idx){
 function abrirChat(){ $("#chat").classList.add("on"); pintarChat(); setTimeout(function(){$("#iaTxt").focus()},250) }
 function cerrarChat(){ $("#chat").classList.remove("on") }
 function usoMes(){try{return JSON.parse(localStorage.getItem("dinero.iauso")||"{}")}catch(e){return {}}}
-function sumarUso(u,modelo){ if(!u) return; var mk=hoyYmd().slice(0,7), U=usoMes(); var p=PRECIOS[modelo]||[2,10];
+function sumarUso(u,modelo){ if(!u||/^gemini/.test(modelo||"")) return; var mk=hoyYmd().slice(0,7), U=usoMes(); var p=PRECIOS[modelo]||[2,10];
   U[mk]=(U[mk]||0)+(u.input_tokens*p[0]+u.output_tokens*p[1])/1e6; try{localStorage.setItem("dinero.iauso",JSON.stringify(U))}catch(e){} }
 function linkify(t){return esc(t).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>").replace(/\n/g,"<br>")}
 function pintarChat(){
   var h='';
   if(!CHAT.length){
-    h+='<div class="ia-hola"><div class="ia-logo">✦</div><b>Pregúntame lo que me preguntarías a Claude.</b><br>Sé todo lo que hay en tu app. Si me dices qué gastaste o me mandas una captura de BBVA, te propongo los cambios y tú los apruebas.</div>';
+    h+='<div class="ia-hola"><div class="ia-logo">✦</div><b>Pregúntame lo que quieras de tu dinero.</b><br>Sé todo lo que hay en tu app. Si me dices qué gastaste o me mandas una captura de BBVA, te propongo los cambios y tú los apruebas.</div>';
     h+='<div class="ia-sug">'+["¿Cuánto puedo gastar este fin de semana?","Hoy gasté 36 en la tienda, 109 en farmacia y 16 de fruta","¿Cómo voy a cerrar octubre?","¿Me alcanza para pagar 5,500 el 15 de noviembre?","Spotify subió a 259"]
       .map(function(s){return '<button type="button" class="chip" data-iasug="'+esc(s)+'">'+esc(s)+'</button>'}).join("")+'</div>';
   }
@@ -1507,7 +1507,7 @@ function pintarChat(){
   });
   if(IA_OCUPADA) h+='<div class="burbuja ia pensando"><i></i><i></i><i></i></div>';
   $("#chatMsgs").innerHTML=h;
-  var u=usoMes()[hoyYmd().slice(0,7)]; $("#iaUso").textContent=u?"este mes ≈ US$"+u.toFixed(2):"";
+  var u=usoMes()[hoyYmd().slice(0,7)]; $("#iaUso").textContent=u?"este mes ≈ US$"+u.toFixed(2):"con Gemini (gratis)";
   $("#chatFoto").innerHTML=IA_FOTO?'<div class="ia-foto"><img src="'+IA_FOTO+'" alt=""><button type="button" data-iaquitarfoto="1">✕</button></div>':"";
   var box=$("#chatMsgs"); box.scrollTop=box.scrollHeight;
 }
@@ -1553,7 +1553,7 @@ function enviarIA(texto){
   .catch(function(e){
     var t=String(e.message||e);
     if(/Acción desconocida/.test(t)) t="Tu hoja todavía tiene el código viejo. Pega el Dinero-Datos.gs nuevo y publica una versión nueva (pasos 5–9).";
-    else if(/llave|ANTHROPIC/i.test(t)) t="Falta la llave de la IA en tu Apps Script (pasos 1–4). "+t;
+    else if(/llave|GEMINI|ANTHROPIC/i.test(t)) t="Falta configurar la llave de la IA en tu Apps Script. "+t;
     else if(/Failed to fetch|Load failed|NetworkError/i.test(t)) t="No hay conexión. Inténtalo en un momento.";
     CHAT.push({rol:"error",texto:t});
   })

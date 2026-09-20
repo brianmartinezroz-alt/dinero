@@ -82,13 +82,17 @@ function mx(n) {
 // ------------------------------------------------------------
 // Red
 // ------------------------------------------------------------
+// Espera con límite: si la red tarda, seguimos con lo guardado.
+function esperar(ms) { return new Promise(r => { Timer.schedule(ms, false, () => r("tarde")) }) }
+async function conLimite(promesa, ms) { return Promise.race([promesa, esperar(ms)]) }
+
 async function llamar(cuerpo) {
   if (!ENDPOINT) throw new Error("sin endpoint")
   const r = new Request(ENDPOINT)
   r.method = "POST"
   r.headers = { "Content-Type": "text/plain;charset=utf-8" }
   r.body = JSON.stringify(cuerpo)
-  r.timeoutInterval = 12
+  r.timeoutInterval = 6
   const j = await r.loadJSON()
   if (!j || !j.ok) throw new Error((j && j.error) || "respuesta rara")
   return j
@@ -96,10 +100,11 @@ async function llamar(cuerpo) {
 
 // Sube lo pendiente y trae lo más reciente. Nunca truena: si no hay
 // internet se queda con lo que ya tenía guardado.
-async function sincronizar() {
+async function sincronizar(limiteMs) {
   const cola = leerJson(COLA, [])
   try {
-    const j = await llamar(cola.length ? { a: "lote", ops: cola } : { a: "get" })
+    const j = await conLimite(llamar(cola.length ? { a: "lote", ops: cola } : { a: "get" }), limiteMs || 7000)
+    if (!j || j === "tarde" || !j.ok) throw new Error("tardó")
     escribirJson(COLA, [])
     const est = j.estado || {}
     const datos = { movimientos: j.movimientos || [], ts: Date.now(), cerebro: est.widget || null }
@@ -267,7 +272,7 @@ function crearWidget(familia) {
     const it = ia.addText("✦"); it.font = Font.boldSystemFont(11); it.textColor = COLOR.mint
   }
 
-  w.refreshAfterDate = new Date(Date.now() + 5 * 60 * 1000)
+  w.refreshAfterDate = new Date(Date.now() + 10 * 60 * 1000)
   return w
 }
 
@@ -312,15 +317,17 @@ async function registrarGasto(catPre) {
   const cola = leerJson(COLA, [])
   cola.push({ a: "add", mov: mov })
   escribirJson(COLA, cola)
-  await sincronizar()
+  await sincronizar(3500)   // si la red no contesta rápido, se queda en la cola
   return true
 }
 
 // ------------------------------------------------------------
 // Pantalla corta dentro de Scriptable
 // ------------------------------------------------------------
-async function pantalla() {
-  const datos = await sincronizar()
+async function pantalla(sinRed) {
+  const cache = leerJson(CACHE, { movimientos: [], ts: 0 })
+  const fresco = cache.ts && (Date.now() - cache.ts < 3 * 60 * 1000)
+  const datos = (sinRed || fresco) ? cache : await sincronizar(6000)
   const s = saldoSemana()
   const pendientes = leerJson(COLA, []).length
   const t = new UITable()
@@ -348,7 +355,7 @@ async function pantalla() {
   cb.titleFont = Font.boldSystemFont(20); cb.centerAligned()
   rb.onSelect = async () => {
     await registrarGasto(null)
-    await pantalla()
+    await pantalla(true)
   }
   t.addRow(rb)
 
@@ -394,12 +401,15 @@ async function pantalla() {
 // Arranque
 // ------------------------------------------------------------
 if (config.runsInWidget) {
-  await sincronizar()
+  // Primero lo guardado: el widget nunca se queda pensando.
+  const cache = leerJson(CACHE, { ts: 0 })
+  const viejo = !cache.ts || (Date.now() - cache.ts > 10 * 60 * 1000)
+  if (viejo || leerJson(COLA, []).length) { try { await sincronizar(5000) } catch (e) {} }
   Script.setWidget(crearWidget(config.widgetFamily || "medium"))
   Script.complete()
 } else {
   const cat = (args.queryParameters && args.queryParameters.cat) ? args.queryParameters.cat : null
   if (cat) await registrarGasto(cat)
-  await pantalla()
+  await pantalla(true)
   Script.complete()
 }

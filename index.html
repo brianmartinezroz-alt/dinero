@@ -389,6 +389,7 @@ function toast(t){var el=$("#toast");el.textContent=t;el.classList.add("on");
 /* ---------- datos ---------- */
 var D = {movimientos:[], estado:{}};
 var COLA = [];
+var SUCIO = {};
 var UI = {mes:mesKey(new Date()), mesModo:"resumen", gModo:"semana", gRef:hoyYmd(), gCat:"", tab:"semana", padDia:0};
 
 function normalizarEstado(){
@@ -422,7 +423,11 @@ function cargarLocal(){
     if(ep){ENDPOINT=ep;localStorage.setItem("dinero.endpoint",ep)} }catch(err){}
   normalizarEstado();
 }
+var MEMO={};
+function memo(k,fn){ if(MEMO[k]===undefined) MEMO[k]=fn(); return MEMO[k] }
+function olvidar(){ MEMO={} }
 function guardarLocal(){
+  olvidar();
   try{ localStorage.setItem("dinero.datos",JSON.stringify(D));
        localStorage.setItem("dinero.cola",JSON.stringify(COLA)); }catch(err){}
 }
@@ -572,7 +577,7 @@ function cambiosDesde(a){
   });
   return out;
 }
-function saldoActual(){var a=ancla();if(!a)return null;return a.monto+suma(cambiosDesde(a))}
+function saldoActual(){return memo("saldoAct",function(){var a=ancla();if(!a)return null;return a.monto+suma(cambiosDesde(a))})}
 
 // Todo lo que falta que entre o salga, del día a al día b.
 function eventosEntre(a,b){
@@ -596,7 +601,8 @@ function eventosEntre(a,b){
   return out.filter(function(e){return e.fecha>=a&&e.fecha<=b}).sort(function(x,y){return x.fecha<y.fecha?-1:1});
 }
 
-function flujo(nDias){
+function flujo(nDias){ if(!nDias||nDias===45) return memo("f45",function(){return flujoCalc(45)}); return flujoCalc(nDias) }
+function flujoCalc(nDias){
   var a=ancla(); if(!a) return null;
   nDias=nDias||45;
   var hoy=hoyYmd(), inicio=saldoActual(), ad=a.ts.slice(0,10);
@@ -626,7 +632,8 @@ function flujo(nDias){
 }
 
 // Gastos que en realidad parecen pagos fijos o apps.
-function sospechas(){
+function sospechas(){ return memo("sosp",sospechasCalc) }
+function sospechasCalc(){
   var out=[], ign=D.estado.ignorados||{};
   D.movimientos.forEach(function(m){
     var mk=m.fecha.slice(0,7), dia=+m.fecha.slice(8,10);
@@ -643,7 +650,8 @@ function pagosVencidos(mk){
   var hoy=hoyYmd(), desde=masDias(hoy,-10);
   return pagosDelMes(mk).filter(function(p){var f=fechaDe(mk,p.dia);return f<=hoy&&f>=desde&&!marcaDe(mk,p.id)});
 }
-function ideas(){
+function ideas(){ return memo("ideas",ideasCalc) }
+function ideasCalc(){
   var I=[], hoy=hoyYmd(), mk=hoy.slice(0,7), s=saldoSemana(hoy);
   var finSem=masDias(lunesYmd(hoy),6), rest=difDias(hoy,finSem)+1;
   // 1. la semana
@@ -787,11 +795,16 @@ function publicarWidget(){
   try{ var w=resumenWidget(), ant=D.estado.widget||{};
     if(JSON.stringify(w)!==JSON.stringify(ant)){ D.estado.widget=w; guardarLocal(); encolarEstado() } }catch(e){}
 }
+var PINTORES={inicio:function(){pintarInicio()},semana:function(){pintarSemana()},mes:function(){pintarMes()},
+  flujo:function(){pintarFlujo()},gastos:function(){pintarGastos()},mas:function(){
+    var act=document.activeElement; if(!(act&&act.id==="ep")) pintarMas()}};
+// Solo se dibuja la pestaña que estás viendo; las demás se marcan y se dibujan al entrar.
 function pintar(){
-  setTimeout(publicarWidget,0);
-  pintarInicio(); pintarSemana(); pintarMes(); pintarFlujo(); pintarGastos();
-  var act=document.activeElement; if(!(act&&act.id==="ep")) pintarMas();
+  Object.keys(PINTORES).forEach(function(k){SUCIO[k]=true});
+  pintarPestana(UI.tab||"inicio");
+  clearTimeout(pintar.w); pintar.w=setTimeout(publicarWidget,1500);
 }
+function pintarPestana(t){ if(!PINTORES[t]) return; SUCIO[t]=false; PINTORES[t]() }
 function filaGasto(m){
   var c=cat(m.categoria);
   return '<button class="row" type="button" data-gasto="'+esc(m.id)+'"><span class="ic">'+c.emoji+'</span>'+
@@ -1303,6 +1316,7 @@ function montarTeclado(){
 var TITULOS={inicio:"Dinero",semana:"Esta semana",mes:"El mes",flujo:"Flujo de dinero",gastos:"Gastos",mas:"Colchón y ajustes"};
 function irA(t){
   UI.tab=t;
+  if(SUCIO[t]!==false) pintarPestana(t);
   document.querySelectorAll(".tab").forEach(function(s){s.classList.remove("on")}); $("#t-"+t).classList.add("on");
   document.querySelectorAll("nav button").forEach(function(b){b.classList.toggle("on",b.dataset.t===t)});
   $("#titulo").textContent=TITULOS[t]; document.querySelector("main").scrollTop=0;
@@ -1477,7 +1491,7 @@ var IA_HERRAMIENTA={
   input_schema:{type:"object",required:["respuesta","acciones"],properties:{
     respuesta:{type:"string",description:"Lo que le dices a Brian, en español de México."},
     acciones:{type:"array",items:{type:"object",required:["tipo"],properties:{
-      tipo:{type:"string",enum:["agregar_gasto","editar_gasto","borrar_gasto","mover_a_pago","palomear","despalomear","marcar_ingreso","poner_saldo","agregar_evento","cambiar_semanal","config_item","crear_meta","aportar_meta","comprar_meta"]},
+      tipo:{type:"string",enum:["agregar_gasto","editar_gasto","borrar_gasto","mover_a_pago","palomear","despalomear","marcar_ingreso","poner_saldo","agregar_evento","cambiar_semanal","config_item","crear_meta","aportar_meta","comprar_meta","pagar_tarjeta","fecha_tarjeta"]},
       meta_id:{type:"string"}, aporte:{type:"number",description:"aporte semanal sugerido para una meta"},
       id:{type:"string",description:"id del gasto (para editar, borrar o mover)"},
       monto:{type:"number",description:"en pesos; en agregar_evento negativo si sale y positivo si entra"},
@@ -1507,6 +1521,8 @@ function descAccion(a){
     case "marcar_ingreso": var rf=String(a.ref||"").split(":"); return "Marcar que cayó "+nombreFuente(rf[0]||"")+(rf[1]?" del día "+rf[1]:"")+" · "+m;
     case "poner_saldo": return "Guardar saldo de BBVA: "+m;
     case "agregar_evento": return "Movimiento único: "+(a.concepto||"")+" "+(a.monto>0?"+":"−")+m+" el "+corta(a.fecha||hoyYmd());
+    case "pagar_tarjeta": return "Pagaste la tarjeta: sale "+mx2(a.monto>0?a.monto:suma(creditoPendiente()))+" de tu BBVA";
+    case "fecha_tarjeta": return "La tarjeta se paga el "+cortaDia(a.fecha);
     case "crear_meta": return "Nueva meta 🎯 "+(a.concepto||"")+(a.monto?" · "+m:"");
     case "aportar_meta": return "Apartar "+m+" para 🎯 "+(a.concepto||(metaPorId(a.meta_id)||{}).nombre||"")+" (sale de tu semana)";
     case "comprar_meta": var mm=metaPorId(a.meta_id)||{}; return "Ya compraste 🎯 "+(mm.nombre||a.concepto||"")+": sale "+mx2(a.monto>0?a.monto:(mm.monto||metaAhorrado(mm)||0))+" de tu BBVA";
@@ -1559,6 +1575,10 @@ function aplicarUna(a){
     else { var x=sec[i]; if(a.monto!=null) x.monto=a.monto; if(a.dia) x.dia=a.dia; if(a.bloque&&a.seccion==="suscripciones") x.bloque=a.bloque;
       if(a.sobre!=null&&a.seccion==="pagos_fijos") x.sobre=a.sobre }
     D.estado.cfg=clon(CFG); return }
+  if(t==="pagar_tarjeta"){ var cps=creditoPendiente(); var mnt=r2(a.monto>0?a.monto:suma(cps));
+    cps.forEach(function(m){D.estado.credito.pagados[m.id]=hoyYmd()});
+    if(mnt>0) D.estado.eventos.push({id:uid(),concepto:"Pago tarjeta de crédito",fecha:hoyYmd(),monto:-mnt,hecho:sello()}); return }
+  if(t==="fecha_tarjeta"){ if(!/^\d{4}-\d{2}-\d{2}$/.test(a.fecha||"")) throw "fecha"; D.estado.credito.fecha_pago=a.fecha; return }
   if(t==="crear_meta"){ if(!a.concepto) throw "ponle nombre";
     D.estado.metas.push({id:uid(),nombre:a.concepto.charAt(0).toUpperCase()+a.concepto.slice(1),monto:r2(a.monto||0),aporte:r2(a.aporte||0),creada:hoyYmd(),hecha:null}); return }
   if(t==="aportar_meta"){ var mt=metaPorId(a.meta_id)||metas().filter(function(m){return !m.hecha&&sinAc(m.nombre)===sinAc(a.concepto||"")})[0];
@@ -1786,16 +1806,28 @@ function catDe(seg){
 var RELLENO=/\b(acabo|acabamos|comprar|compramos|gaste|gastamos|pague|compre|fue|fueron|de|en|la|el|los|las|un|una|unos|unas|y|con|pesos|peso|varos|hoy|ayer|antier|anteayer|tarjeta|efectivo|para|por|al|del|me|mi|se|lo|que|tambien|ademas|luego|otro|otros|lunes|martes|miercoles|jueves|viernes|sabado|domingo)\b/g;
 function notaDe(seg){var n=seg.replace(/\d+(\.\d+)?/g," ").replace(RELLENO," ").replace(/[^a-zñ0-9 ]/g," ").replace(/\s+/g," ").trim();
   return n?n.charAt(0).toUpperCase()+n.slice(1):""}
-function pagoDicho(t,mk){
+function pagoDicho(t,mk,todos){
   // "pagué spotify", "ya salió netflix" → pago del mes sin palomear
-  var ps=pagosDelMes(mk).filter(function(p){return !marcaDe(mk,p.id)});
+  var ps=pagosDelMes(mk).filter(function(p){return todos||!marcaDe(mk,p.id)});
   for(var i=0;i<ps.length;i++){var nm=sinAc(ps[i].concepto).replace(/[()]/g,"");
     var clave=nm.split(" ").filter(function(w){return w.length>3})[0]||nm;
     var re=function(w){return new RegExp("(^|[^a-z])"+w.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"([^a-z]|$)").test(t)};
     if(re(nm)||(clave.length>3&&re(clave))) return ps[i]}
   return null;
 }
-function notaMeta(s){return notaDe(sinAc(s).replace(/\b(quiero|comprar|comprarme|compre|me|va|a|costar|cuesta|cuestan|vale|nueva|meta|ahorrar|ahorra|aparta|apartar|guarda|separa|abona|mete|metele|voy|pienso|planeo|puedo|alcanza|gastar|pagar|unos|unas|como|aproximadamente|mas|menos|ya|lo|la|tengo|seria|sale|salen)\b/g," "))}
+var MESES_N={enero:1,febrero:2,marzo:3,abril:4,mayo:5,junio:6,julio:7,agosto:8,septiembre:9,setiembre:9,octubre:10,noviembre:11,diciembre:12};
+function fechaTexto(t){
+  var hoy=hoyYmd();
+  if(/\bmanana\b/.test(t)) return masDias(hoy,1);
+  if(/\bpasado manana\b/.test(t)) return masDias(hoy,2);
+  var m=t.match(/\b(\d{1,2})\s+de\s+([a-z]+)\b/);
+  if(m&&MESES_N[m[2]]){ var y=+hoy.slice(0,4), mm=MESES_N[m[2]], f=y+"-"+p2(mm)+"-"+p2(+m[1]);
+    if(f<hoy) f=(y+1)+"-"+p2(mm)+"-"+p2(+m[1]); return f }
+  var d=t.match(/\bel\s+(\d{1,2})\b/);
+  if(d){ var dd=+d[1]; if(dd>=1&&dd<=31){ var mk=hoy.slice(0,7), f2=fechaDe(mk,dd); if(f2<hoy) f2=fechaDe(sigMes(mk),dd); return f2 } }
+  return null;
+}
+function notaMeta(s){return notaDe(sinAc(s).replace(/\b(quiero|comprar|comprarme|compre|me|va|a|costar|cuesta|cuestan|vale|nueva|meta|ahorrar|ahorra|aparta|apartar|guarda|separa|abona|mete|metele|voy|pienso|planeo|puedo|alcanza|gastar|pagar|unos|unas|como|aproximadamente|mas|menos|ya|lo|la|tengo|seria|sale|salen|apunta|anota|agenda|recuerdame|recuerda|que|pagar|pago|van|depositar|dar|cae|depositan|del|el|un|una|unos|unas|en|por)\b/g," "))}
 function metaDicha(t){
   var mejor=null, pts=0;
   metas().filter(function(m){return !m.hecha}).forEach(function(m){
@@ -1809,7 +1841,29 @@ function entenderGratis(texto){
   var esPlan=/\b(voy a (comprar|gastar|pagar)|me voy a comprar|pienso (comprar|gastar)|planeo (comprar|gastar)|puedo comprar|alcanza para)\b/.test(t)&&/\d/.test(t);
   if(!esPlan&&PREGUNTA.test(t)&&!/\d/.test(t.replace(/\?/g,""))) return {pregunta:true};
   if(!esPlan&&PREGUNTA.test(t)&&/\?/.test(t)) return {pregunta:true};
-  var acc=[], hoy=hoyYmd(), mk=hoy.slice(0,7), fecha=fechaDicha(t), ef=/\befectivo\b/.test(t), cr=/\b(credito|a meses|con la tarjeta de credito)\b/.test(t);
+  var acc=[], hoy=hoyYmd(), mk=hoy.slice(0,7), fecha=fechaDicha(t), ef=/\befectivo\b/.test(t), cr=/\b(credito|a meses|msi|meses sin intereses|tarjeta de credito|con la de credito|la tarjetota)\b/.test(t);
+  // 💳 tarjeta, ⚙️ ajustes y 📌 apuntes
+  var numsT=t.match(/\d+(\.\d+)?/g)||[], ultT=numsT.length?+numsT[numsT.length-1]:0, fT=fechaTexto(t);
+  if(/\b(pague|ya pague|liquide|abone)\b.*\btarjeta\b/.test(t)&&(ultT>0||creditoPendiente().length)) return {acciones:[{tipo:"pagar_tarjeta",monto:ultT||0}]};
+  if(/\btarjeta\b/.test(t)&&/\b(se paga|fecha|corte|vence|limite|pago es)\b/.test(t)&&fT) return {acciones:[{tipo:"fecha_tarjeta",fecha:fT}]};
+  if(/\b(cambia|pon|ajusta|sube|baja|deja|que sean)\b/.test(t)&&/\b(semana|semanal|por semana)\b/.test(t)&&ultT>0)
+    return {acciones:[{tipo:"cambiar_semanal",monto:ultT}]};
+  if(/\b(subio|bajo|ahora cuesta|cuesta ahora|cambio a|quedo en|ya cuesta)\b/.test(t)&&ultT>0){
+    var pc=pagoDicho(t,hoyYmd().slice(0,7),true);
+    if(pc) return {acciones:[{tipo:"config_item",seccion:pc.tipo==="app"?"suscripciones":(pc.tipo==="quincena"?"pagos_quincena":"pagos_fijos"),operacion:"cambiar",concepto:pc.concepto,monto:ultT}]};
+  }
+  if(/\b(apunta|anota|agenda|recuerdame|recuerda|tengo que pagar|voy a pagar|me van a (pagar|depositar|dar)|me cae|me depositan)\b/.test(t)&&ultT>0&&fT){
+    var entra=/\bme (van a (pagar|depositar|dar)|cae|depositan)\b/.test(t);
+    var sinF=t.replace(/\b(\d{1,2})\s+de\s+[a-z]+\b/g," ").replace(/\bel\s+\d{1,2}\b/g," ");
+    var nE=sinF.match(/\d+(\.\d+)?/g)||[], montoE=nE.length?+nE[nE.length-1]:ultT;
+    var nomE=notaMeta(sinF)||(entra?"Ingreso":"Pago");
+    if(!(montoE>0)) return null;
+    return {acciones:[{tipo:"agregar_evento",concepto:nomE,fecha:fT,monto:(entra?1:-1)*montoE}]};
+  }
+  if(/\b(borra|elimina|quita)\b/.test(t)&&/\b(ultimo|ultima|ese gasto|el gasto|lo ultimo)\b/.test(t)){
+    var ul=D.movimientos.slice().sort(function(a,b){return a.fecha<b.fecha?-1:(a.id<b.id?-1:1)}).pop();
+    if(ul) return {acciones:[{tipo:"borrar_gasto",id:ul.id}]};
+  }
   // 🎯 metas y planes
   var nums=t.match(/\d+(\.\d+)?/g)||[], ultimo=nums.length?+nums[nums.length-1]:0;
   var mtD=metaDicha(t);

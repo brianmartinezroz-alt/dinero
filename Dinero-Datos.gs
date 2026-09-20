@@ -30,6 +30,13 @@ function manejar(e) {
   }
 
   var accion = datos.a || 'get';
+
+  // La IA va fuera del candado: tarda unos segundos y no debe frenar la hoja.
+  if (accion === 'ia') {
+    try { return responder(preguntarIA(datos)); }
+    catch (err) { return responder({ ok: false, error: String(err) }); }
+  }
+
   var candado = LockService.getScriptLock();
   try {
     candado.waitLock(20000);
@@ -317,6 +324,68 @@ function filaDe(hoja, id) {
     if (String(col[i][0]) === String(id)) return i + 1;
   }
   return -1;
+}
+
+/* =====================================================================
+   ✦ IA — el cerebro de la app le pregunta a Claude por aquí.
+   Tu llave vive en: Configuración del proyecto → Propiedades de secuencia
+   de comandos → ANTHROPIC_API_KEY. Nunca sale de Google.
+   Opcional: MODELO_IA (por defecto claude-sonnet-5; más barato:
+   claude-haiku-4-5-20251001).
+   ===================================================================== */
+var MODELO_POR_DEFECTO = 'claude-sonnet-5';
+
+function preguntarIA(d) {
+  var props = PropertiesService.getScriptProperties();
+  var llave = props.getProperty('ANTHROPIC_API_KEY');
+  if (!llave) return { ok: false, error: 'Falta la llave ANTHROPIC_API_KEY en las propiedades del Apps Script' };
+  var modelo = props.getProperty('MODELO_IA') || MODELO_POR_DEFECTO;
+  if (!d.mensajes || !d.mensajes.length) return { ok: false, error: 'No hay mensaje' };
+
+  var cuerpo = {
+    model: modelo,
+    max_tokens: 2000,
+    system: String(d.sistema || '').slice(0, 20000),
+    messages: d.mensajes.slice(-12)
+  };
+  if (d.herramienta && d.herramienta.name) {
+    cuerpo.tools = [d.herramienta];
+    cuerpo.tool_choice = { type: 'tool', name: d.herramienta.name };
+  }
+
+  var r = UrlFetchApp.fetch('https://api.anthropic.com/v1/messages', {
+    method: 'post',
+    contentType: 'application/json',
+    headers: { 'x-api-key': llave, 'anthropic-version': '2023-06-01' },
+    payload: JSON.stringify(cuerpo),
+    muteHttpExceptions: true
+  });
+  var codigo = r.getResponseCode();
+  var j;
+  try { j = JSON.parse(r.getContentText()); } catch (err) { j = null; }
+  if (codigo !== 200 || !j) {
+    var msg = (j && j.error && j.error.message) ? j.error.message : ('la IA contestó ' + codigo);
+    if (codigo === 401) msg = 'La llave de la IA no es válida (revisa ANTHROPIC_API_KEY)';
+    if (codigo === 400 && /credit/i.test(msg)) msg = 'Tu cuenta de la API no tiene saldo. Recarga en console.anthropic.com → Billing';
+    return { ok: false, error: msg };
+  }
+
+  var salida = null, texto = '';
+  (j.content || []).forEach(function (b) {
+    if (b.type === 'tool_use') salida = b.input;
+    if (b.type === 'text') texto += b.text;
+  });
+  if (!salida) salida = { respuesta: texto || '(sin respuesta)', acciones: [] };
+  return { ok: true, r: salida, uso: j.usage, modelo: modelo };
+}
+
+// Córrela UNA vez desde el editor para dar permiso de conectarse a la IA.
+function probarIA() {
+  var r = preguntarIA({
+    sistema: 'Contesta en una línea.',
+    mensajes: [{ role: 'user', content: 'Di: «El cerebro de Dinero está conectado».' }]
+  });
+  Logger.log(JSON.stringify(r));
 }
 
 /* ---------- prueba manual desde el editor ---------- */

@@ -12,7 +12,7 @@
 <link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..800&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
 :root{
   --ink:#0E1116;--surf:#161B22;--surf-2:#1D2430;--line:#242C39;
@@ -24,10 +24,10 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%}
 body{margin:0;background:var(--ink);color:var(--text);
-  font-family:"DM Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-family:"Public Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overscroll-behavior-y:none}
-.mono{font-family:"DM Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
-h1,h2,h3{font-family:"Fraunces",sans-serif;margin:0;font-weight:600;letter-spacing:-.015em}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+h1,h2,h3{font-family:"Archivo",sans-serif;margin:0;font-weight:600;letter-spacing:-.015em}
 button{font:inherit;color:inherit;background:none;border:none;padding:0;cursor:pointer}
 button:focus-visible{outline:2px solid var(--mint);outline-offset:2px;border-radius:8px}
 
@@ -35,7 +35,7 @@ button:focus-visible{outline:2px solid var(--mint);outline-offset:2px;border-rad
 header{padding:calc(var(--safe-t) + 14px) 18px 12px;display:flex;align-items:center;gap:12px;
   border-bottom:1px solid var(--line);background:var(--ink);position:relative;z-index:5}
 header h1{font-size:19px;flex:1}
-#sync{font-family:"DM Mono",monospace;font-size:10.5px;letter-spacing:.06em;color:var(--dim-2);
+#sync{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.06em;color:var(--dim-2);
   display:flex;align-items:center;gap:6px}
 #sync .dot{width:7px;height:7px;border-radius:50%;background:var(--dim-2);flex:none}
 #sync.ok .dot{background:var(--mint)} #sync.pend .dot{background:var(--brass)} #sync.err .dot{background:var(--coral)}
@@ -54,14 +54,14 @@ nav button.on{color:var(--text)}
 #fab:active{transform:scale(.94)}
 
 .hero{padding:28px 0 4px;text-align:center}
-.hero .cifra{font-family:"Fraunces",sans-serif;font-weight:700;font-size:clamp(50px,16vw,70px);line-height:1;
+.hero .cifra{font-family:"Archivo",sans-serif;font-weight:700;font-size:clamp(50px,16vw,70px);line-height:1;
   letter-spacing:-.04em;font-variant-numeric:tabular-nums}
 .cifra.v,.v{color:var(--mint)} .cifra.a,.a{color:var(--brass)} .cifra.r,.r{color:var(--coral)}
 .hero .pie{color:var(--dim);font-size:14.5px;margin-top:8px}
 .barra{height:9px;border-radius:5px;background:var(--surf-2);overflow:hidden;margin:18px 0 9px;display:flex}
 .barra i{display:block;height:100%;transition:width .35s ease}
 .reinicio{font-size:12px;color:var(--dim-2);text-align:center}
-.rotulo{font-family:"DM Mono",monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+.rotulo{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
   color:var(--dim-2);font-weight:600;margin:28px 0 10px;display:flex;justify-content:space-between;align-items:center;gap:10px}
 .rotulo span:last-child{letter-spacing:.04em;text-transform:none}
 .lista{background:var(--surf);border-radius:var(--r);overflow:hidden}
@@ -72,7 +72,7 @@ nav button.on{color:var(--text)}
 .row .tx{min-width:0}
 .row .tx b{display:block;font-weight:500;font-size:15.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .row .tx small{display:block;color:var(--dim-2);font-size:11.5px;margin-top:1px}
-.row .mt{font-weight:600;font-size:15px;white-space:nowrap;font-family:"DM Mono",monospace;font-variant-numeric:tabular-nums}
+.row .mt{font-weight:600;font-size:15px;white-space:nowrap;font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums}
 .row.hecho .tx b,.row.hecho .mt{color:var(--dim-2)}
 .mt.pos{color:var(--mint)} .mt.mal{color:var(--coral)}
 button.row:active{background:var(--surf-2)}
@@ -87,7 +87,7 @@ details[open]>summary .ic{transform:rotate(90deg)}
 
 .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:6px}
 .tile{background:var(--surf);border-radius:var(--r);padding:13px 8px;text-align:center}
-.tile b{display:block;font-family:"DM Mono",monospace;font-variant-numeric:tabular-nums;font-size:16px;font-weight:600}
+.tile b{display:block;font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;font-size:16px;font-weight:600}
 .tile small{display:block;color:var(--dim-2);font-size:11px;margin-top:3px}
 .nota{color:var(--dim-2);font-size:12.5px;text-align:center;margin-top:12px}
 .vacio{padding:24px 16px;text-align:center;color:var(--dim-2);font-size:14px}
@@ -109,19 +109,19 @@ details[open]>summary .ic{transform:rotate(90deg)}
 .chip{background:var(--surf-2);border-radius:20px;padding:7px 12px;font-size:13px;font-weight:600}
 .chip.v{background:rgba(74,222,155,.14);color:var(--mint)}
 .chip:active{filter:brightness(1.3)}
-.cab-cerebro{display:flex;align-items:center;gap:8px;font-family:"DM Mono",monospace;font-size:10.5px;
+.cab-cerebro{display:flex;align-items:center;gap:8px;font-family:"IBM Plex Mono",monospace;font-size:10.5px;
   letter-spacing:.16em;text-transform:uppercase;color:var(--dim-2);font-weight:600;margin-top:26px}
 .cab-cerebro i{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 10px var(--mint)}
 
 .graf{background:var(--surf);border-radius:var(--r);padding:14px 12px 8px}
 .graf svg{display:block;width:100%;height:auto}
-.graf text{font-family:"DM Mono",monospace;font-size:10px;fill:var(--dim-2)}
+.graf text{font-family:"IBM Plex Mono",monospace;font-size:10px;fill:var(--dim-2)}
 .leyenda{display:flex;flex-wrap:wrap;gap:6px 14px;padding:8px 4px 4px;font-size:12px;color:var(--dim)}
 .leyenda span{display:flex;align-items:center;gap:6px}
 .leyenda i{width:9px;height:9px;border-radius:3px;display:inline-block}
 .dona{display:grid;grid-template-columns:132px 1fr;gap:14px;align-items:center}
 .caja{background:var(--surf);border-radius:var(--r);padding:16px}
-.caja .big{font-family:"Fraunces",sans-serif;font-weight:700;font-size:34px;letter-spacing:-.03em;line-height:1.1;font-variant-numeric:tabular-nums}
+.caja .big{font-family:"Archivo",sans-serif;font-weight:700;font-size:34px;letter-spacing:-.03em;line-height:1.1;font-variant-numeric:tabular-nums}
 .caja small{color:var(--dim-2);font-size:12.5px;display:block}
 
 /* hojas */
@@ -134,11 +134,11 @@ details[open]>summary .ic{transform:rotate(90deg)}
 .hoja h3{font-size:18px;margin:2px 0 12px}
 #pad .cab{display:flex;align-items:baseline;gap:10px;margin-bottom:6px}
 #pad .cab small{color:var(--dim-2);font-size:12.5px;flex:1;text-align:right}
-#monto{font-family:"Fraunces",sans-serif;font-weight:700;font-size:44px;line-height:1.1;letter-spacing:-.03em;
+#monto{font-family:"Archivo",sans-serif;font-weight:700;font-size:44px;line-height:1.1;letter-spacing:-.03em;
   font-variant-numeric:tabular-nums;min-height:52px}
 #monto.cero{color:var(--dim-2)}
 .teclas{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0 10px}
-.teclas button{background:var(--surf-2);border-radius:12px;height:52px;font-family:"DM Mono",monospace;font-size:22px;font-weight:500}
+.teclas button{background:var(--surf-2);border-radius:12px;height:52px;font-family:"IBM Plex Mono",monospace;font-size:22px;font-weight:500}
 .teclas button:active{background:#2A3441}
 .cats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .cats button{background:var(--surf-2);border-radius:12px;padding:10px 4px;font-size:12px;font-weight:600;
@@ -151,14 +151,14 @@ details[open]>summary .ic{transform:rotate(90deg)}
 .dias button.on{background:var(--text);color:var(--ink)}
 
 .campo{background:var(--surf-2);border-radius:12px;padding:11px 13px;margin-top:8px}
-.campo label{display:block;font-size:10.5px;color:var(--dim-2);margin-bottom:5px;font-family:"DM Mono",monospace;
+.campo label{display:block;font-size:10.5px;color:var(--dim-2);margin-bottom:5px;font-family:"IBM Plex Mono",monospace;
   letter-spacing:.1em;text-transform:uppercase}
 .campo input,.campo select{width:100%;background:var(--ink);border:1px solid var(--line);border-radius:10px;padding:11px;
-  color:var(--text);font-family:"DM Mono",monospace;font-size:15px;-webkit-appearance:none;appearance:none}
+  color:var(--text);font-family:"IBM Plex Mono",monospace;font-size:15px;-webkit-appearance:none;appearance:none}
 .campo input:focus,.campo select:focus{outline:none;border-color:var(--mint)}
 .lista .campo{background:var(--surf);margin:0;border-radius:0}
 .btn{display:block;width:100%;background:var(--mint);color:#08130D;border-radius:12px;padding:15px;text-align:center;
-  font-weight:600;font-size:16px;margin-top:12px;font-family:"Fraunces",sans-serif}
+  font-weight:600;font-size:16px;margin-top:12px;font-family:"Archivo",sans-serif}
 .btn.gris{background:var(--surf-2);color:var(--text)}
 .btn.rojo{background:transparent;color:var(--coral);border:1px solid rgba(242,112,107,.4)}
 .btn:active{filter:brightness(.92)}
@@ -175,8 +175,8 @@ details[open]>summary .ic{transform:rotate(90deg)}
 #chat{position:fixed;inset:0;z-index:50;background:var(--ink);display:flex;flex-direction:column;transform:translateX(102%);transition:transform .28s cubic-bezier(.22,1,.36,1)}
 #chat.on{transform:none}
 .chat-cab{display:flex;align-items:center;gap:8px;padding:calc(var(--safe-t) + 12px) 14px 12px;border-bottom:1px solid var(--line)}
-.chat-cab b{font-family:"Fraunces",sans-serif;font-size:17px}
-.chat-cab small{display:block;font-size:10.5px;color:var(--dim-2);font-family:"DM Mono",monospace}
+.chat-cab b{font-family:"Archivo",sans-serif;font-size:17px}
+.chat-cab small{display:block;font-size:10.5px;color:var(--dim-2);font-family:"IBM Plex Mono",monospace}
 .chat-x{color:var(--mint);font-size:14.5px;width:74px}
 #chatMsgs{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 14px 20px;display:flex;flex-direction:column;gap:10px}
 .burbuja{max-width:88%;padding:11px 14px;border-radius:18px;font-size:15px;line-height:1.45;word-wrap:break-word}
@@ -204,6 +204,7 @@ details[open]>summary .ic{transform:rotate(90deg)}
   font:inherit;font-size:16px;max-height:120px;min-height:42px}
 #iaTxt:focus{outline:none;border-color:var(--mint)}
 .foto-btn{width:42px;height:42px;border-radius:21px;background:var(--surf);display:flex;align-items:center;justify-content:center;font-size:19px;cursor:pointer;flex:none}
+#micBtn.on{background:var(--coral);animation:bote 1s infinite}
 #iaEnviar{width:42px;height:42px;border-radius:21px;background:var(--mint);color:#08130D;font-size:20px;font-weight:700;flex:none}
 .ia-foto{position:relative;display:inline-block;margin-bottom:8px}
 .ia-foto img{height:80px;border-radius:10px;display:block}
@@ -247,14 +248,15 @@ details[open]>summary .ic{transform:rotate(90deg)}
 <div id="hoja" class="hoja"></div>
 <div id="chat">
   <div class="chat-cab"><button type="button" data-chatcerrar="1" class="chat-x">‹ Volver</button>
-    <button type="button" data-iapanel="1" style="flex:1;text-align:center"><b>✦ Cerebro</b><small id="iaUso"></small></button>
+    <button type="button" data-iapanel="1" style="flex:1;text-align:center"><b>🎙 Anotar · ✦ Cerebro</b><small id="iaUso"></small></button>
     <button type="button" data-iaborrar="1" class="chat-x" style="text-align:right">Borrar</button></div>
   <div id="chatMsgs"></div>
   <div class="chat-pie">
     <div id="chatFoto"></div>
     <div class="chat-fila">
       <label class="foto-btn" aria-label="Mandar captura">📷<input type="file" accept="image/*" id="iaFile" hidden></label>
-      <textarea id="iaTxt" rows="1" placeholder="Pregunta o dime qué gastaste…"></textarea>
+      <button id="micBtn" type="button" class="foto-btn" aria-label="Dictar">🎙</button>
+      <textarea id="iaTxt" rows="1" placeholder="Dicta o escribe…"></textarea>
       <button id="iaEnviar" type="button" aria-label="Enviar">↑</button>
     </div>
   </div>
@@ -752,7 +754,9 @@ function filaGasto(m){
     '<span class="mt">'+mx2(m.monto)+'</span></button>';
 }
 function pintarIdeas(){
-  var h='<button type="button" class="preg" data-abriria="1"><b>✦</b>Pregúntame o dime qué gastaste…</button>'+
+  var h='<div style="display:grid;grid-template-columns:1fr auto;gap:8px;margin-top:14px">'+
+    '<button type="button" class="preg" data-dictar="1" style="margin:0"><b>🎙</b>Dicta lo que gastaste · gratis</button>'+
+    '<button type="button" class="preg" data-abriria="1" style="margin:0;width:auto"><b>✦</b></button></div>'+
     '<div class="cab-cerebro"><i></i>Lo que veo</div><div class="cerebro">';
   ideas().forEach(function(x){
     h+='<div class="idea '+x.n+'">'+x.t;
@@ -1270,8 +1274,11 @@ document.addEventListener("click",function(ev){
   var b=ev.target.closest("button"); if(!b) return; var d=b.dataset;
   if(b.id==="iaBtn"||d.abriria){abrirChat();return}
   if(d.chatcerrar){cerrarChat();return}
-  if(b.id==="iaEnviar"){enviarIA($("#iaTxt").value);return}
-  if(d.iasug){enviarIA(d.iasug);return}
+  if(b.id==="iaEnviar"){enviarChat($("#iaTxt").value);return}
+  if(b.id==="micBtn"){dictar();return}
+  if(d.iaconsulta){consultarIA(+d.iaconsulta);return}
+  if(d.dictar){abrirChat();setTimeout(dictar,350);return}
+  if(d.iasug){enviarChat(d.iasug);return}
   if(d.iaaplicar){aplicarAcciones(+d.iaaplicar);return}
   if(d.iaquitarfoto){IA_FOTO=null;pintarChat();return}
   if(d.iaborrar){if(confirm("¿Borrar la conversación?")){CHAT=[];guardarChat();pintarChat()}return}
@@ -1417,14 +1424,14 @@ function descAccion(a){
   if(a.desc) return a.desc;
   var m=a.monto!=null?mx2(Math.abs(a.monto)):"";
   switch(a.tipo){
-    case "agregar_gasto": return "Agregar gasto "+m+" · "+cat(a.categoria).nombre+(a.nota?" ("+a.nota+")":"")+" · "+corta(a.fecha||hoyYmd());
+    case "agregar_gasto": return "Agregar gasto "+m+(a.efectivo?" (efectivo)":"")+" · "+cat(a.categoria).nombre+(a.nota?" ("+a.nota+")":"")+" · "+corta(a.fecha||hoyYmd());
     case "editar_gasto": var g=buscarMov(a.id); return "Editar gasto "+(g?mx2(g.monto)+" del "+corta(g.fecha):a.id)+" → "+
       [a.monto!=null?m:"",a.categoria?cat(a.categoria).nombre:"",a.fecha?corta(a.fecha):"",a.nota||""].filter(Boolean).join(", ");
     case "borrar_gasto": var g2=buscarMov(a.id); return "Borrar gasto "+(g2?mx2(g2.monto)+" "+cat(g2.categoria).nombre+" del "+corta(g2.fecha):a.id);
     case "mover_a_pago": var g3=buscarMov(a.id), p=pagoPorId(a.mes||"",a.pago_id||""); return "Sacar "+(g3?mx2(g3.monto):"el gasto")+" de la semana y palomear "+(p?p.concepto:a.pago_id);
     case "palomear": var p2=pagoPorId(a.mes||"",a.pago_id||""); return "Palomear "+(p2?p2.concepto+" "+mx(p2.monto):a.pago_id)+" de "+(a.mes?MESES[+a.mes.slice(5,7)-1]:"");
     case "despalomear": var p3=pagoPorId(a.mes||"",a.pago_id||""); return "Quitar palomita a "+(p3?p3.concepto:a.pago_id);
-    case "marcar_ingreso": return "Marcar que cayó "+(a.ref||"")+" "+m;
+    case "marcar_ingreso": var rf=String(a.ref||"").split(":"); return "Marcar que cayó "+nombreFuente(rf[0]||"")+(rf[1]?" del día "+rf[1]:"")+" · "+m;
     case "poner_saldo": return "Guardar saldo de BBVA: "+m;
     case "agregar_evento": return "Movimiento único: "+(a.concepto||"")+" "+(a.monto>0?"+":"−")+m+" el "+corta(a.fecha||hoyYmd());
     case "cambiar_semanal": return "Cambiar tu semana a "+m;
@@ -1548,8 +1555,8 @@ function linkify(t){return esc(t).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>").replace(
 function pintarChat(){
   var h='';
   if(!CHAT.length){
-    h+='<div class="ia-hola"><div class="ia-logo">✦</div><b>Pregúntame lo que quieras de tu dinero.</b><br>Sé todo lo que hay en tu app. Si me dices qué gastaste o me mandas una captura de BBVA, te propongo los cambios y tú los apruebas.</div>';
-    h+='<div class="ia-sug">'+["¿Cuánto puedo gastar este fin de semana?","Hoy gasté 36 en la tienda, 109 en farmacia y 16 de fruta","¿Cómo voy a cerrar octubre?","¿Me alcanza para pagar 5,500 el 15 de noviembre?","Spotify subió a 259"]
+    h+='<div class="ia-hola"><div class="ia-logo">✦</div><b>Dicta o escribe lo que gastaste: es gratis.</b><br>«36 en la tienda y 109 en farmacia», «pagué Spotify», «ya cayó UVEG», «tengo 3,040 en el banco». Eso lo entiendo sola, sin IA.<br><br>Las preguntas («¿me alcanza…?») y las capturas de BBVA sí van a la IA ✦ y cuestan unos centavos; siempre te pregunto antes.</div>';
+    h+='<div class="ia-sug">'+["Hoy gasté 36 en la tienda, 109 en farmacia y 16 de fruta","Pagué Spotify","Ayer 840 de gasolina","¿Me alcanza para pagar 5,500 el 15 de noviembre?"]
       .map(function(s){return '<button type="button" class="chip" data-iasug="'+esc(s)+'">'+esc(s)+'</button>'}).join("")+'</div>';
   }
   CHAT.forEach(function(m,i){
@@ -1566,7 +1573,9 @@ function pintarChat(){
           :'<button type="button" class="btn" style="margin-top:8px;padding:11px" data-iaaplicar="'+i+'">Aplicar lo marcado</button>';
         h+='</div>';
       }
+      if(m.consulta) h+='<div class="acc" style="display:flex;gap:6px;margin-top:9px"><button type="button" class="chip v" data-iaconsulta="'+i+'">✦ Sí, pregúntale</button></div>';
       if(m.costo) h+='<div class="dim" style="margin-top:6px;text-align:right">≈ '+mxc(pesos(m.costo))+'</div>';
+      else if(m.gratis) h+='<div class="dim" style="margin-top:6px;text-align:right">sin IA · gratis</div>';
       h+='</div>';
     }
   });
@@ -1625,6 +1634,135 @@ function enviarIA(texto){
   .then(function(){IA_OCUPADA=false;guardarChat();pintarChat()});
 }
 
+
+/* =====================================================================
+   🎙 ANOTAR GRATIS — entiende lo que dices o escribes SIN usar la IA.
+   Gastos ("36 en la tienda y 109 en farmacia"), pagos ("pagué Spotify"),
+   ingresos ("ya cayó UVEG") y saldo ("tengo 3040 en el banco").
+   Solo si es una pregunta te ofrece mandarla a la IA.
+   ===================================================================== */
+var PALABRAS_CAT=[
+  ["gasolina",["gasolina","gasolinera","gas del carro","pemex","mobil","shell","oxxo gas","repsol","g500","bp ","tanque","cargue gas","carga de gas"]],
+  ["salud",["farmacia","similares","simi","doctor","medico","medicina","medicamento","consulta","dentista","analisis","laboratorio","pediatra","guadalajara","del ahorro","benavides","san pablo"]],
+  ["casa",["ferreteria","limpieza","detergente","jabon","garrafon","agua","lavanderia","home depot","foco","pañales","panales","toallitas","bebe","casa"]],
+  ["comida",["comida","comi","comer","tienda","abarrotes","fruta","fruteria","verdura","mercado","tortillas","tortilleria","pollo","carne","carniceria","super","soriana","chedraui","walmart","aurrera","despensa","restaurante","fonda","taco","tacos","torta","desayuno","almuerzo","cena","uber eats","rappi","didi food","pizza","sushi","huevo","leche","pan de caja"]],
+  ["antojo",["antojo","dulce","postre","helado","cafe","starbucks","oxxo","7 eleven","seven","botana","papas","chela","cerveza","refresco","galletas","pan dulce","panaderia","cine","churro","elote","esquite"]]
+];
+var PREGUNTA=/\?|^(cuanto|cuánto|como|cómo|que|qué|me alcanza|puedo|cuando|cuándo|por que|porque|dime|explica|analiza|revisa|compara|hazme|ayudame)\b/i;
+function sinAc(s){return String(s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"")}
+var NUM_PAL={"un":1,"uno":1,"dos":2,"tres":3,"cuatro":4,"cinco":5,"seis":6,"siete":7,"ocho":8,"nueve":9,"diez":10,"quince":15,"veinte":20,"treinta":30,"cuarenta":40,"cincuenta":50,"sesenta":60,"setenta":70,"ochenta":80,"noventa":90,"cien":100,"ciento":100,"doscientos":200,"trescientos":300,"cuatrocientos":400,"quinientos":500,"seiscientos":600,"setecientos":700,"ochocientos":800,"novecientos":900,"mil":1000};
+function numeros(t){
+  // "1,200" → 1200 ; "mil" sueltos → 1000 ; "36.50" se respeta
+  t=t.replace(/(\d),(\d{3})\b/g,"$1$2").replace(/\$\s*/g,"");
+  t=t.replace(/\b(\d+)\s*mil\b/g,function(m,a){return String(+a*1000)});
+  t=t.replace(/\b(un|uno|dos|tres|cuatro|cinco|seis|siete|ocho|nueve|diez|quince|veinte|treinta|cuarenta|cincuenta|sesenta|setenta|ochenta|noventa|cien|ciento|doscientos|trescientos|cuatrocientos|quinientos|seiscientos|setecientos|ochocientos|novecientos|mil)\b( y (uno|dos|tres|cuatro|cinco|seis|siete|ocho|nueve))?( pesos)/g,
+    function(m,a,b,c,d){return String(NUM_PAL[a]+(c?NUM_PAL[c]:0))+(d||"")});
+  return t;
+}
+function fechaDicha(t){
+  var hoy=hoyYmd();
+  if(/\bantier|anteayer\b/.test(t)) return masDias(hoy,-2);
+  if(/\bayer\b/.test(t)) return masDias(hoy,-1);
+  var dias=["domingo","lunes","martes","miercoles","jueves","viernes","sabado"];
+  for(var i=0;i<7;i++) if(new RegExp("\\b(el )?"+dias[i]+"\\b").test(t)){
+    var d=deYmd(hoy), k=0; while(d.getDay()!==i&&k<7){d.setDate(d.getDate()-1);k++} return ymd(d) }
+  return hoy;
+}
+function catDe(seg){
+  for(var c=0;c<CFG.categorias.length;c++){var ct=CFG.categorias[c]; if(new RegExp("\\b"+sinAc(ct.nombre)+"\\b").test(seg)) return ct.id}
+  for(var i=0;i<PALABRAS_CAT.length;i++) for(var j=0;j<PALABRAS_CAT[i][1].length;j++)
+    if(seg.indexOf(sinAc(PALABRAS_CAT[i][1][j]))>-1) return catOk(PALABRAS_CAT[i][0]);
+  return "otro";
+}
+var RELLENO=/\b(gaste|gastamos|pague|compre|fue|fueron|de|en|la|el|los|las|un|una|unos|unas|y|con|pesos|peso|varos|hoy|ayer|antier|anteayer|tarjeta|efectivo|para|por|al|del|me|mi|se|lo|que|tambien|ademas|luego|otro|otros|lunes|martes|miercoles|jueves|viernes|sabado|domingo)\b/g;
+function notaDe(seg){var n=seg.replace(/\d+(\.\d+)?/g," ").replace(RELLENO," ").replace(/[^a-zñ0-9 ]/g," ").replace(/\s+/g," ").trim();
+  return n?n.charAt(0).toUpperCase()+n.slice(1):""}
+function pagoDicho(t,mk){
+  // "pagué spotify", "ya salió netflix" → pago del mes sin palomear
+  var ps=pagosDelMes(mk).filter(function(p){return !marcaDe(mk,p.id)});
+  for(var i=0;i<ps.length;i++){var nm=sinAc(ps[i].concepto).replace(/[()]/g,"");
+    var clave=nm.split(" ").filter(function(w){return w.length>3})[0]||nm;
+    var re=function(w){return new RegExp("(^|[^a-z])"+w.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"([^a-z]|$)").test(t)};
+    if(re(nm)||(clave.length>3&&re(clave))) return ps[i]}
+  return null;
+}
+function entenderGratis(texto){
+  var t=numeros(sinAc(texto).trim());
+  if(!t) return null;
+  if(PREGUNTA.test(t)&&!/\d/.test(t.replace(/\?/g,""))) return {pregunta:true};
+  if(PREGUNTA.test(t)&&/\?/.test(t)) return {pregunta:true};
+  var acc=[], hoy=hoyYmd(), mk=hoy.slice(0,7), fecha=fechaDicha(t), ef=/\befectivo\b/.test(t);
+  // saldo del banco
+  var sm=t.match(/(saldo|tengo|me quedan|hay)\D{0,25}?(\d+(\.\d+)?)\D{0,15}(banco|bbva|cuenta|disponible)|(saldo|disponible)\D{0,10}(\d+(\.\d+)?)/);
+  if(sm){ acc.push({tipo:"poner_saldo",monto:+(sm[2]||sm[6])}); return {acciones:acc} }
+  // ingresos
+  if(/\b(cayo|cayeron|me pagaron|me depositaron|ya llego|deposito)\b/.test(t)){
+    ingresosDelMes(mk).forEach(function(i){ if(recibidoDe(mk,i)) return;
+      if(t.indexOf(sinAc(i.fuente))>-1||(i.fuente==="colegio"&&/colegio|escuela|militar/.test(t))){
+        var n=(t.match(/\d+(\.\d+)?/)||[])[0]; acc.push({tipo:"marcar_ingreso",mes:mk,ref:idIng(i),monto:n?+n:i.monto}) }});
+    if(acc.length) return {acciones:acc};
+  }
+  // partir en pedazos: "36 en la tienda, 109 en farmacia y 16 de fruta"
+  var segs=t.split(/,|;|\.\s|\s+y\s+|\s+tambien\s+|\s+ademas\s+|\s+luego\s+|\s+mas\s+|\n/).map(function(s){return s.trim()}).filter(Boolean);
+  // un número sin descripción se junta con el siguiente pedazo ("36 y la tienda" es raro; "la tienda 36" también sirve)
+  var arm=[];
+  segs.forEach(function(s){ var tieneN=/\d/.test(s), prev=arm[arm.length-1];
+    if(!tieneN&&prev) prev.txt=(prev.txt?prev.txt+" ":"")+s;
+    else if(tieneN) arm.push({n:s,txt:""}) });
+  arm.forEach(function(x){
+    var seg=x.n+" "+(x.txt||""), nums=seg.match(/\d+(\.\d+)?/g); if(!nums) return;
+    var monto=+nums[nums.length-1]; if(!(monto>0)) return;
+    var p=pagoDicho(seg,mk);
+    if(p&&Math.abs(p.monto-monto)<=p.monto*0.1){ acc.push({tipo:"palomear",mes:mk,pago_id:p.id,fecha:fecha}); return }
+    acc.push({tipo:"agregar_gasto",monto:monto,categoria:catDe(seg),fecha:fecha,nota:notaDe(seg),efectivo:ef});
+  });
+  // "pagué spotify" sin monto
+  if(!acc.length&&/\b(pague|salio|me cobraron|cobro|ya pague)\b/.test(t)){
+    var p2=pagoDicho(t,mk); if(p2) acc.push({tipo:"palomear",mes:mk,pago_id:p2.id,fecha:fecha});
+  }
+  if(!acc.length) return PREGUNTA.test(t)?{pregunta:true}:null;
+  return {acciones:acc};
+}
+function anotarGratis(texto){
+  texto=String(texto||"").trim(); if(!texto) return false;
+  var r=entenderGratis(texto);
+  if(!r||r.pregunta) return false;
+  r.acciones.forEach(function(a){a.desc=descAccion(a)});
+  CHAT.push({rol:"yo",texto:texto});
+  CHAT.push({rol:"ia",gratis:true,texto:r.acciones.length===1?"Esto entendí:":"Entendí "+r.acciones.length+" cosas:",acciones:r.acciones});
+  $("#iaTxt").value=""; guardarChat(); pintarChat(); return true;
+}
+function enviarChat(texto){
+  texto=String(texto||"").trim();
+  if(IA_FOTO){ enviarIA(texto); return }
+  if(!texto) return;
+  if(anotarGratis(texto)) return;
+  // no lo entendí sola: pregunto antes de gastar
+  CHAT.push({rol:"yo",texto:texto});
+  CHAT.push({rol:"ia",gratis:true,consulta:texto,texto:"Eso no lo puedo resolver sola. ¿Se lo paso a la IA? Cuesta unos "+mxc(pesos((iaMes().n?iaMes().usd/iaMes().n:0.011)))+"."});
+  $("#iaTxt").value=""; guardarChat(); pintarChat();
+}
+function consultarIA(i){
+  var m=CHAT[i]; if(!m||!m.consulta) return;
+  var q=m.consulta; m.consulta=null; m.texto="Se lo pasé a la IA 👇";
+  // quita la burbuja duplicada del usuario: enviarIA la vuelve a poner
+  if(CHAT[i-1]&&CHAT[i-1].rol==="yo"&&CHAT[i-1].texto===q) CHAT.splice(i-1,1);
+  enviarIA(q);
+}
+/* ---- dictado: micrófono del navegador si existe; si no, el del teclado ---- */
+var REC=null;
+function dictar(){
+  var SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){ var t=$("#iaTxt"); t.focus(); toast("Toca el 🎤 de tu teclado y dicta"); return }
+  if(REC){ try{REC.stop()}catch(e){} return }
+  REC=new SR(); REC.lang="es-MX"; REC.interimResults=true; REC.continuous=false;
+  var fin="";
+  REC.onresult=function(e){var s="";for(var i=0;i<e.results.length;i++){s+=e.results[i][0].transcript} $("#iaTxt").value=s; fin=s};
+  REC.onerror=function(){ toast("No pude usar el micrófono. Usa el 🎤 del teclado"); $("#iaTxt").focus() };
+  REC.onend=function(){ REC=null; $("#micBtn").classList.remove("on"); if(fin.trim()) enviarChat(fin) };
+  try{ REC.start(); $("#micBtn").classList.add("on") }catch(e){ REC=null; $("#iaTxt").focus() }
+}
+
 /* ================= ARRANQUE ================= */
 cargarLocal(); montarTeclado(); pintar();
 pintarSync(ENDPOINT?(COLA.length?"pend":"ok"):""); sincronizar();
@@ -1632,7 +1770,7 @@ setInterval(sincronizar,60000);
 window.addEventListener("online",sincronizar);
 document.addEventListener("visibilitychange",function(){if(!document.hidden){pintar();sincronizar()}});
 $("#iaFile").addEventListener("change",function(e){var fl=e.target.files&&e.target.files[0];if(fl)leerFoto(fl);e.target.value=""});
-$("#iaTxt").addEventListener("keydown",function(e){if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();enviarIA(this.value)}});
+$("#iaTxt").addEventListener("keydown",function(e){if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();enviarChat(this.value)}});
 try{if(new URLSearchParams(location.search).get("ia"))abrirChat()}catch(e){}
 if("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(function(){});
 </script>

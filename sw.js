@@ -1,7 +1,8 @@
-/* Dinero — service worker: guarda la app para que abra sin internet.
+/* Dinero — service worker
+   Guarda la app en el teléfono para que abra sin internet.
    Sube el número de CACHE cada vez que publiques una versión nueva. */
 
-var CACHE = 'dinero-v2';
+var CACHE = 'dinero-v4';
 var ARCHIVOS = ['./', './index.html', './manifest.json', './icon.png'];
 
 self.addEventListener('install', function (e) {
@@ -23,7 +24,12 @@ self.addEventListener('activate', function (e) {
 });
 
 self.addEventListener('fetch', function (e) {
-  if (e.request.url.indexOf('script.google.com') > -1 || e.request.method !== 'GET') return;
+  var url = e.request.url;
+
+  // Las llamadas a la hoja de Google nunca se guardan en cache.
+  if (url.indexOf('script.google.com') > -1 || e.request.method !== 'GET') return;
+
+  // La app: primero la red, y si no hay, lo guardado.
   e.respondWith(
     fetch(e.request).then(function (r) {
       if (r && r.status === 200 && r.type === 'basic') {

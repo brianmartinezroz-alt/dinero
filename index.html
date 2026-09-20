@@ -12,7 +12,7 @@
 <link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..800&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
 :root{
   --ink:#0E1116;--surf:#161B22;--surf-2:#1D2430;--line:#242C39;
@@ -24,10 +24,10 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%}
 body{margin:0;background:var(--ink);color:var(--text);
-  font-family:"DM Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-family:"Public Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overscroll-behavior-y:none}
-.mono{font-family:"DM Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
-h1,h2,h3{font-family:"Fraunces",sans-serif;margin:0;font-weight:600;letter-spacing:-.015em}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+h1,h2,h3{font-family:"Archivo",sans-serif;margin:0;font-weight:600;letter-spacing:-.015em}
 button{font:inherit;color:inherit;background:none;border:none;padding:0;cursor:pointer}
 button:focus-visible{outline:2px solid var(--mint);outline-offset:2px;border-radius:8px}
 
@@ -35,7 +35,7 @@ button:focus-visible{outline:2px solid var(--mint);outline-offset:2px;border-rad
 header{padding:calc(var(--safe-t) + 14px) 18px 12px;display:flex;align-items:center;gap:12px;
   border-bottom:1px solid var(--line);background:var(--ink);position:relative;z-index:5}
 header h1{font-size:19px;flex:1}
-#sync{font-family:"DM Mono",monospace;font-size:10.5px;letter-spacing:.06em;color:var(--dim-2);
+#sync{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.06em;color:var(--dim-2);
   display:flex;align-items:center;gap:6px}
 #sync .dot{width:7px;height:7px;border-radius:50%;background:var(--dim-2);flex:none}
 #sync.ok .dot{background:var(--mint)} #sync.pend .dot{background:var(--brass)} #sync.err .dot{background:var(--coral)}
@@ -54,14 +54,14 @@ nav button.on{color:var(--text)}
 #fab:active{transform:scale(.94)}
 
 .hero{padding:28px 0 4px;text-align:center}
-.hero .cifra{font-family:"Fraunces",sans-serif;font-weight:700;font-size:clamp(50px,16vw,70px);line-height:1;
+.hero .cifra{font-family:"Archivo",sans-serif;font-weight:700;font-size:clamp(50px,16vw,70px);line-height:1;
   letter-spacing:-.04em;font-variant-numeric:tabular-nums}
 .cifra.v,.v{color:var(--mint)} .cifra.a,.a{color:var(--brass)} .cifra.r,.r{color:var(--coral)}
 .hero .pie{color:var(--dim);font-size:14.5px;margin-top:8px}
 .barra{height:9px;border-radius:5px;background:var(--surf-2);overflow:hidden;margin:18px 0 9px;display:flex}
 .barra i{display:block;height:100%;transition:width .35s ease}
 .reinicio{font-size:12px;color:var(--dim-2);text-align:center}
-.rotulo{font-family:"DM Mono",monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+.rotulo{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
   color:var(--dim-2);font-weight:600;margin:28px 0 10px;display:flex;justify-content:space-between;align-items:center;gap:10px}
 .rotulo span:last-child{letter-spacing:.04em;text-transform:none}
 .lista{background:var(--surf);border-radius:var(--r);overflow:hidden}
@@ -72,7 +72,7 @@ nav button.on{color:var(--text)}
 .row .tx{min-width:0}
 .row .tx b{display:block;font-weight:500;font-size:15.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .row .tx small{display:block;color:var(--dim-2);font-size:11.5px;margin-top:1px}
-.row .mt{font-weight:600;font-size:15px;white-space:nowrap;font-family:"DM Mono",monospace;font-variant-numeric:tabular-nums}
+.row .mt{font-weight:600;font-size:15px;white-space:nowrap;font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums}
 .row.hecho .tx b,.row.hecho .mt{color:var(--dim-2)}
 .mt.pos{color:var(--mint)} .mt.mal{color:var(--coral)}
 button.row:active{background:var(--surf-2)}
@@ -87,7 +87,7 @@ details[open]>summary .ic{transform:rotate(90deg)}
 
 .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:6px}
 .tile{background:var(--surf);border-radius:var(--r);padding:13px 8px;text-align:center}
-.tile b{display:block;font-family:"DM Mono",monospace;font-variant-numeric:tabular-nums;font-size:16px;font-weight:600}
+.tile b{display:block;font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;font-size:16px;font-weight:600}
 .tile small{display:block;color:var(--dim-2);font-size:11px;margin-top:3px}
 .nota{color:var(--dim-2);font-size:12.5px;text-align:center;margin-top:12px}
 .vacio{padding:24px 16px;text-align:center;color:var(--dim-2);font-size:14px}
@@ -109,19 +109,19 @@ details[open]>summary .ic{transform:rotate(90deg)}
 .chip{background:var(--surf-2);border-radius:20px;padding:7px 12px;font-size:13px;font-weight:600}
 .chip.v{background:rgba(74,222,155,.14);color:var(--mint)}
 .chip:active{filter:brightness(1.3)}
-.cab-cerebro{display:flex;align-items:center;gap:8px;font-family:"DM Mono",monospace;font-size:10.5px;
+.cab-cerebro{display:flex;align-items:center;gap:8px;font-family:"IBM Plex Mono",monospace;font-size:10.5px;
   letter-spacing:.16em;text-transform:uppercase;color:var(--dim-2);font-weight:600;margin-top:26px}
 .cab-cerebro i{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 10px var(--mint)}
 
 .graf{background:var(--surf);border-radius:var(--r);padding:14px 12px 8px}
 .graf svg{display:block;width:100%;height:auto}
-.graf text{font-family:"DM Mono",monospace;font-size:10px;fill:var(--dim-2)}
+.graf text{font-family:"IBM Plex Mono",monospace;font-size:10px;fill:var(--dim-2)}
 .leyenda{display:flex;flex-wrap:wrap;gap:6px 14px;padding:8px 4px 4px;font-size:12px;color:var(--dim)}
 .leyenda span{display:flex;align-items:center;gap:6px}
 .leyenda i{width:9px;height:9px;border-radius:3px;display:inline-block}
 .dona{display:grid;grid-template-columns:132px 1fr;gap:14px;align-items:center}
 .caja{background:var(--surf);border-radius:var(--r);padding:16px}
-.caja .big{font-family:"Fraunces",sans-serif;font-weight:700;font-size:34px;letter-spacing:-.03em;line-height:1.1;font-variant-numeric:tabular-nums}
+.caja .big{font-family:"Archivo",sans-serif;font-weight:700;font-size:34px;letter-spacing:-.03em;line-height:1.1;font-variant-numeric:tabular-nums}
 .caja small{color:var(--dim-2);font-size:12.5px;display:block}
 
 /* hojas */
@@ -134,11 +134,11 @@ details[open]>summary .ic{transform:rotate(90deg)}
 .hoja h3{font-size:18px;margin:2px 0 12px}
 #pad .cab{display:flex;align-items:baseline;gap:10px;margin-bottom:6px}
 #pad .cab small{color:var(--dim-2);font-size:12.5px;flex:1;text-align:right}
-#monto{font-family:"Fraunces",sans-serif;font-weight:700;font-size:44px;line-height:1.1;letter-spacing:-.03em;
+#monto{font-family:"Archivo",sans-serif;font-weight:700;font-size:44px;line-height:1.1;letter-spacing:-.03em;
   font-variant-numeric:tabular-nums;min-height:52px}
 #monto.cero{color:var(--dim-2)}
 .teclas{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0 10px}
-.teclas button{background:var(--surf-2);border-radius:12px;height:52px;font-family:"DM Mono",monospace;font-size:22px;font-weight:500}
+.teclas button{background:var(--surf-2);border-radius:12px;height:52px;font-family:"IBM Plex Mono",monospace;font-size:22px;font-weight:500}
 .teclas button:active{background:#2A3441}
 .cats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .cats button{background:var(--surf-2);border-radius:12px;padding:10px 4px;font-size:12px;font-weight:600;
@@ -151,14 +151,14 @@ details[open]>summary .ic{transform:rotate(90deg)}
 .dias button.on{background:var(--text);color:var(--ink)}
 
 .campo{background:var(--surf-2);border-radius:12px;padding:11px 13px;margin-top:8px}
-.campo label{display:block;font-size:10.5px;color:var(--dim-2);margin-bottom:5px;font-family:"DM Mono",monospace;
+.campo label{display:block;font-size:10.5px;color:var(--dim-2);margin-bottom:5px;font-family:"IBM Plex Mono",monospace;
   letter-spacing:.1em;text-transform:uppercase}
 .campo input,.campo select{width:100%;background:var(--ink);border:1px solid var(--line);border-radius:10px;padding:11px;
-  color:var(--text);font-family:"DM Mono",monospace;font-size:15px;-webkit-appearance:none;appearance:none}
+  color:var(--text);font-family:"IBM Plex Mono",monospace;font-size:15px;-webkit-appearance:none;appearance:none}
 .campo input:focus,.campo select:focus{outline:none;border-color:var(--mint)}
 .lista .campo{background:var(--surf);margin:0;border-radius:0}
 .btn{display:block;width:100%;background:var(--mint);color:#08130D;border-radius:12px;padding:15px;text-align:center;
-  font-weight:600;font-size:16px;margin-top:12px;font-family:"Fraunces",sans-serif}
+  font-weight:600;font-size:16px;margin-top:12px;font-family:"Archivo",sans-serif}
 .btn.gris{background:var(--surf-2);color:var(--text)}
 .btn.rojo{background:transparent;color:var(--coral);border:1px solid rgba(242,112,107,.4)}
 .btn:active{filter:brightness(.92)}
@@ -175,8 +175,8 @@ details[open]>summary .ic{transform:rotate(90deg)}
 #chat{position:fixed;inset:0;z-index:50;background:var(--ink);display:flex;flex-direction:column;transform:translateX(102%);transition:transform .28s cubic-bezier(.22,1,.36,1)}
 #chat.on{transform:none}
 .chat-cab{display:flex;align-items:center;gap:8px;padding:calc(var(--safe-t) + 12px) 14px 12px;border-bottom:1px solid var(--line)}
-.chat-cab b{font-family:"Fraunces",sans-serif;font-size:17px}
-.chat-cab small{display:block;font-size:10.5px;color:var(--dim-2);font-family:"DM Mono",monospace}
+.chat-cab b{font-family:"Archivo",sans-serif;font-size:17px}
+.chat-cab small{display:block;font-size:10.5px;color:var(--dim-2);font-family:"IBM Plex Mono",monospace}
 .chat-x{color:var(--mint);font-size:14.5px;width:74px}
 #chatMsgs{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 14px 20px;display:flex;flex-direction:column;gap:10px}
 .burbuja{max-width:88%;padding:11px 14px;border-radius:18px;font-size:15px;line-height:1.45;word-wrap:break-word}
@@ -375,6 +375,8 @@ function normalizarEstado(){
   var e=D.estado;
   ["checklist","recibidos","cierres"].forEach(function(k){if(!e[k]||typeof e[k]!=="object")e[k]={}});
   ["ajustes","eventos","saldos"].forEach(function(k){if(!Array.isArray(e[k]))e[k]=[]});
+  if(!e.credito||typeof e.credito!=="object") e.credito={ids:{},pagados:{},fecha_pago:"",nota:""};
+  if(!e.credito.ids) e.credito.ids={}; if(!e.credito.pagados) e.credito.pagados={};
   if(!e.ia||typeof e.ia!=="object") e.ia={}; if(!e.ia.uso) e.ia.uso={}; if(!e.ia.n) e.ia.n={};
   if(!D.movimientos) D.movimientos=[];
   aplicarCfg();
@@ -502,6 +504,9 @@ function proyeccionColchon(){
   });
   return fs
 }
+/* ---- tarjeta de crédito: cuenta en tu semana, pero sale del banco hasta que pagas la tarjeta ---- */
+function esCredito(m){return !!D.estado.credito.ids[m.id]}
+function creditoPendiente(){var c=D.estado.credito;return D.movimientos.filter(function(m){return c.ids[m.id]&&!c.pagados[m.id]})}
 function clase(saldo){var p=saldo/CFG.monto_semanal;if(saldo<0||p<0.15)return "r";if(p<0.40)return "a";return "v"}
 function colorDe(c){return c==="v"?"var(--mint)":(c==="a"?"var(--brass)":"var(--coral)")}
 
@@ -518,7 +523,7 @@ function pagoPorId(mk,id){return pagosDelMes(mk).filter(function(p){return p.id=
 function cambiosDesde(a){
   var ts=a.ts, ad=ts.slice(0,10), out=[], prev=D.estado.previos||{};
   D.movimientos.forEach(function(m){
-    if(m.es_efectivo||prev[m.id]) return;
+    if(m.es_efectivo||prev[m.id]||esCredito(m)) return;
     if(m.fecha>=ad && selloMov(m)>ts) out.push({fecha:m.fecha,concepto:cat(m.categoria).nombre+(m.nota?" · "+m.nota:""),monto:-m.monto,tipo:"gasto"});
   });
   Object.keys(D.estado.checklist).forEach(function(mk){
@@ -559,6 +564,8 @@ function eventosEntre(a,b){
   D.estado.eventos.forEach(function(e){
     if(!e.hecho) out.push({fecha:e.fecha,concepto:e.concepto,monto:e.monto,tipo:"evento",ref:e.id});
   });
+  var cp=creditoPendiente(), fp=D.estado.credito.fecha_pago;
+  if(cp.length&&/^\d{4}-\d{2}-\d{2}$/.test(fp)) out.push({fecha:fp,concepto:"Pago tarjeta de crédito ("+cp.length+" compras)",monto:-suma(cp),tipo:"evento",ref:"credito"});
   return out.filter(function(e){return e.fecha>=a&&e.fecha<=b}).sort(function(x,y){return x.fecha<y.fecha?-1:1});
 }
 
@@ -664,6 +671,10 @@ function ideas(){
     }
     I.push({n:"",t:t});
   }
+  // 7a. tarjeta de crédito
+  var cpI=creditoPendiente(); if(cpI.length){ var fpI=D.estado.credito.fecha_pago;
+    I.push({n:fpI?"":"warn",t:"En tu tarjeta de crédito llevas <b>"+mx2(suma(cpI))+"</b> ("+cpI.length+" compra"+(cpI.length>1?"s":"")+"). "+
+      (fpI?"Lo cuento como pago el <b>"+cortaDia(fpI)+"</b> en tu flujo.":"No sé cuándo la pagas: ponle fecha para que entre a tu flujo."),acc:[["Ver tarjeta","tarjeta"]]}) }
   // 7b. saldo de la IA
   try{ var sI=iaSaldo(); if(sI&&sI.usd<1.5) I.push({n:sI.usd<0.5?"bad":"warn",t:"Tu saldo de la IA (Anthropic) va en <b>US$"+Math.max(0,sI.usd).toFixed(2)+"</b>. Cuando se acabe se apaga el ✦ aquí y el cerebro de EFA.",acc:[["Ver","iapanel"]]}) }catch(e){}
   // 8. colchón
@@ -750,7 +761,7 @@ function pintar(){
 function filaGasto(m){
   var c=cat(m.categoria);
   return '<button class="row" type="button" data-gasto="'+esc(m.id)+'"><span class="ic">'+c.emoji+'</span>'+
-    '<span class="tx"><b>'+esc(m.nota||c.nombre)+'</b><small>'+esc(m.nota?c.nombre+" · ":"")+cortaDia(m.fecha)+(m.es_efectivo?" · efectivo":"")+'</small></span>'+
+    '<span class="tx"><b>'+esc(m.nota||c.nombre)+'</b><small>'+esc(m.nota?c.nombre+" · ":"")+cortaDia(m.fecha)+(m.es_efectivo?" · efectivo":"")+(esCredito(m)?" · 💳 crédito":"")+'</small></span>'+
     '<span class="mt">'+mx2(m.monto)+'</span></button>';
 }
 function pintarIdeas(){
@@ -986,6 +997,10 @@ function pintarMas(){
     ["pagos_quincena","Pagos del 15",mx(suma(CFG.pagos_quincena))],["categorias","Categorías de gasto",CFG.categorias.length+""]];
   h+='<div class="rotulo"><span>Ajustes · el cerebro usa esto</span><span></span></div><div class="lista">'+
     cfgRows.map(function(r){return '<button class="row" type="button" data-cfg="'+r[0]+'"><span class="ic">⚙︎</span><span class="tx"><b>'+r[1]+'</b><small>'+r[2]+'</small></span><span class="mt" style="color:var(--dim-2)">›</span></button>'}).join("")+'</div>';
+  var cpM=creditoPendiente(), fpM=D.estado.credito.fecha_pago;
+  h+='<div class="rotulo"><span>Tarjeta de crédito</span><span>'+(D.estado.credito.nota?esc(D.estado.credito.nota):"")+'</span></div><div class="lista">'+
+    '<button class="row" type="button" data-tarjeta="1"><span class="ic">💳</span><span class="tx"><b>'+mx2(suma(cpM))+' por pagar</b><small>'+cpM.length+' compra'+(cpM.length===1?"":"s")+
+    (fpM?' · se paga el '+cortaDia(fpM):' · toca para poner la fecha de pago')+'</small></span><span class="mt" style="color:var(--dim-2)">›</span></button></div>';
   var im=iaMes(), isd=iaSaldo();
   h+='<div class="rotulo"><span>La IA</span><span>lo que cobra</span></div><div class="lista">'+
     '<button class="row" type="button" data-iapanel="1"><span class="ic">✦</span><span class="tx"><b>Este mes '+mxc(pesos(im.usd))+'</b><small>'+im.n+' preguntas'+
@@ -1019,7 +1034,7 @@ function abrirGasto(id){
     '<div class="campo"><label>Categoría</label><div class="cats" id="g-cats">'+CFG.categorias.map(function(c){
       return '<button type="button" data-gcatsel="'+esc(c.id)+'" class="'+(c.id===m.categoria?"on":"")+'"><span class="ce">'+c.emoji+'</span>'+esc(c.nombre)+'</button>'}).join("")+'</div></div>'+
     campo("g-fecha","Fecha",m.fecha,"date")+campo("g-nota","Nota (dónde, qué)",m.nota||"","text")+
-    campo("g-ef","¿Cómo pagaste?",m.es_efectivo?"1":"0","select",[["0","Tarjeta / transferencia"],["1","Efectivo (no sale del banco)"]]);
+    campo("g-ef","¿Cómo pagaste?",esCredito(m)?"2":(m.es_efectivo?"1":"0"),"select",[["0","Débito / transferencia"],["1","Efectivo (no sale del banco)"],["2","💳 Tarjeta de crédito (sale cuando la pagues)"]]);
   if(ancla()) h+=campo("g-prev","¿Ya estaba en el saldo que me diste?",(D.estado.previos||{})[m.id]?"1":"0","select",[["0","No, es nuevo"],["1","Sí, ya estaba descontado"]]);
   h+='<button class="btn" type="button" data-gguardar="'+esc(m.id)+'">Guardar cambios</button>';
   var cand=pagosDelMes(mk).filter(function(p){return !marcaDe(mk,p.id)})
@@ -1036,6 +1051,7 @@ function guardarGasto(id){
   m.monto=Math.round(n*100)/100; if(sel) m.categoria=sel.dataset.gcatsel;
   if(/^\d{4}-\d{2}-\d{2}$/.test(val("g-fecha"))) m.fecha=val("g-fecha");
   m.nota=val("g-nota").trim(); m.es_efectivo=val("g-ef")==="1";
+  if(val("g-ef")==="2") D.estado.credito.ids[m.id]=true; else delete D.estado.credito.ids[m.id]; encolarEstado();
   if(document.getElementById("g-prev")){ if(!D.estado.previos)D.estado.previos={};
     if(val("g-prev")==="1") D.estado.previos[m.id]=true; else delete D.estado.previos[m.id]; encolarEstado() }
   guardarLocal(); encolar({a:"edit",mov:m}); cerrarHojas(); pintar(); toast("Guardado");
@@ -1268,6 +1284,7 @@ function accion(a){
   else if(k==="ingreso") abrirIngreso(r[0],r[1]);
   else if(k==="nuevoevento") abrirEvento(null);
   else if(k==="iapanel") abrirIA();
+  else if(k==="tarjeta") abrirTarjeta();
   else if(k==="restaurar"){ if(confirm("¿Regresar pagos, ingresos y categorías a como venían en el spec?")){ delete D.estado.cfg; aplicarCfg(); montarTeclado(); guardarLocal(); encolarEstado(); pintar() } }
 }
 document.addEventListener("click",function(ev){
@@ -1283,6 +1300,9 @@ document.addEventListener("click",function(ev){
   if(d.iaquitarfoto){IA_FOTO=null;pintarChat();return}
   if(d.iaborrar){if(confirm("¿Borrar la conversación?")){CHAT=[];guardarChat();pintarChat()}return}
   if(d.iapanel){abrirIA();return}
+  if(d.tarjeta){abrirTarjeta();return}
+  if(d.tcguardar){guardarTarjeta();return}
+  if(d.tcpagar){pagarTarjeta();return}
   if(d.iasaldo){guardarSaldoIA();return}
   if(d.iarecarga){registrarRecarga();return}
   if(d.t){irA(d.t);return}
@@ -1369,6 +1389,7 @@ function contexto(){
         return [d.fecha,Math.round(d.bal),d.evs.map(function(e){return e.concepto+" "+Math.round(e.monto)}).join("; ")]})}:null,
     movimientos_unicos:D.estado.eventos,
     colchon:{actual:colchonActual(),proyeccion:proyeccionColchon().map(function(x){return [x.mes,Math.round(x.acum)]})},
+    tarjeta_credito:{por_pagar:r2(suma(creditoPendiente())),compras:creditoPendiente().map(function(m){return [m.id,m.fecha,m.monto,m.nota]}),fecha_pago:D.estado.credito.fecha_pago||null},
     ia:{este_mes_pesos:Math.round(pesos(iaMes().usd)*100)/100,preguntas_mes:iaMes().n,saldo_anthropic_usd:iaSaldo()?Math.round(iaSaldo().usd*100)/100:null,nota:"el saldo de Anthropic lo comparte con su app EFA"},
     avisos_de_la_app:ideas().map(function(x){return plano(x.t)}),
     configuracion:{ingresos:CFG.ingresos,pagos_fijos:CFG.pagos_fijos,suscripciones:CFG.suscripciones,pagos_quincena:CFG.pagos_quincena}
@@ -1385,7 +1406,7 @@ var IA_SISTEMA=[
 "- Ingresos: colegio el día 1 y UVEG el 15 y el 30. Cada ingreso está en el mes en que CAE en su cuenta.",
 "- Lo que sobra del mes se barre al colchón (meta en reglas.meta_colchon). Los meses altos (colegio > 30,000) mandan el excedente al colchón.",
 "- saldo_banco: el último saldo de BBVA que dio más lo que ha pasado desde entonces. flujo: proyección día por día; gasto_diario_seguro es cuánto puede gastar al día sin quedar en ceros antes del próximo ingreso.",
-"- No hay conexión con el banco: todo se captura a mano. La tarjeta de crédito no está en el sistema salvo que se agregue como movimiento único.",
+"- No hay conexión con el banco: todo se captura a mano. Compras con tarjeta de crédito: cuentan en su semana pero salen del banco hasta la fecha de pago de la tarjeta (tarjeta_credito en el contexto). Si dice que pagó con crédito, agregar_gasto con credito=true.",
 "",
 "CÓMO TRABAJAS:",
 "- Usa SOLO los datos del CONTEXTO. No inventes gastos, ids ni montos. Si falta un dato para contestar bien, dilo y pregunta una sola cosa.",
@@ -1409,7 +1430,7 @@ var IA_HERRAMIENTA={
       id:{type:"string",description:"id del gasto (para editar, borrar o mover)"},
       monto:{type:"number",description:"en pesos; en agregar_evento negativo si sale y positivo si entra"},
       categoria:{type:"string"}, fecha:{type:"string",description:"AAAA-MM-DD"}, nota:{type:"string"},
-      efectivo:{type:"boolean"},
+      efectivo:{type:"boolean"}, credito:{type:"boolean",description:"true si lo pagó con tarjeta de crédito"},
       mes:{type:"string",description:"AAAA-MM"}, pago_id:{type:"string"}, ref:{type:"string",description:"ref del ingreso, p. ej. colegio:1"},
       concepto:{type:"string"},
       seccion:{type:"string",enum:["pagos_fijos","suscripciones","pagos_quincena","ingresos"]},
@@ -1424,7 +1445,7 @@ function descAccion(a){
   if(a.desc) return a.desc;
   var m=a.monto!=null?mx2(Math.abs(a.monto)):"";
   switch(a.tipo){
-    case "agregar_gasto": return "Agregar gasto "+m+(a.efectivo?" (efectivo)":"")+" · "+cat(a.categoria).nombre+(a.nota?" ("+a.nota+")":"")+" · "+corta(a.fecha||hoyYmd());
+    case "agregar_gasto": return "Agregar gasto "+m+(a.efectivo?" (efectivo)":"")+(a.credito?" 💳 crédito":"")+" · "+cat(a.categoria).nombre+(a.nota?" ("+a.nota+")":"")+" · "+corta(a.fecha||hoyYmd());
     case "editar_gasto": var g=buscarMov(a.id); return "Editar gasto "+(g?mx2(g.monto)+" del "+corta(g.fecha):a.id)+" → "+
       [a.monto!=null?m:"",a.categoria?cat(a.categoria).nombre:"",a.fecha?corta(a.fecha):"",a.nota||""].filter(Boolean).join(", ");
     case "borrar_gasto": var g2=buscarMov(a.id); return "Borrar gasto "+(g2?mx2(g2.monto)+" "+cat(g2.categoria).nombre+" del "+corta(g2.fecha):a.id);
@@ -1446,7 +1467,7 @@ function aplicarUna(a){
   var t=a.tipo;
   if(t==="agregar_gasto"){ if(!(a.monto>0)) throw "monto";
     var m={id:uid(),fecha:fechaOk(a.fecha),monto:r2(a.monto),categoria:catOk(a.categoria),es_efectivo:!!a.efectivo,nota:a.nota||""};
-    D.movimientos.push(m); encolar({a:"add",mov:m}); return }
+    D.movimientos.push(m); encolar({a:"add",mov:m}); if(a.credito){D.estado.credito.ids[m.id]=true} return }
   if(t==="editar_gasto"){ var g=buscarMov(a.id); if(!g) throw "no encontré el gasto";
     if(a.monto>0) g.monto=r2(a.monto); if(a.categoria) g.categoria=catOk(a.categoria);
     if(a.fecha) g.fecha=fechaOk(a.fecha); if(a.nota!=null) g.nota=a.nota; if(a.efectivo!=null) g.es_efectivo=!!a.efectivo;
@@ -1498,6 +1519,30 @@ function aplicarAcciones(idx){
 /* ---- conversación ---- */
 function abrirChat(){ $("#chat").classList.add("on"); pintarChat(); setTimeout(function(){$("#iaTxt").focus()},250) }
 function cerrarChat(){ $("#chat").classList.remove("on") }
+/* ---- tarjeta de crédito ---- */
+function abrirTarjeta(){
+  var c=D.estado.credito, cp=creditoPendiente();
+  var h='<h3>💳 Tarjeta de crédito</h3>'+
+    '<div class="trio"><div class="tile"><b>'+mx2(suma(cp))+'</b><small>por pagar</small></div><div class="tile"><b>'+cp.length+'</b><small>compras</small></div>'+
+    '<div class="tile"><b>'+(c.fecha_pago?corta(c.fecha_pago):"—")+'</b><small>fecha de pago</small></div></div>'+
+    '<div class="nota" style="text-align:left">Lo que compras con crédito sí cuenta en tu semana, pero no sale de tu BBVA hasta que pagas la tarjeta. Ese día entra a tu flujo.</div>'+
+    campo("tc-fecha","Fecha límite de pago",c.fecha_pago||"","date")+campo("tc-nota","Nota (por ejemplo: está apagada)",c.nota||"","text")+
+    '<button class="btn gris" type="button" data-tcguardar="1">Guardar fecha</button>';
+  if(cp.length) h+='<div class="rotulo"><span>Compras sin pagar</span><span></span></div><div class="lista">'+cp.map(filaGasto).join("")+'</div>'+
+    '<button class="btn" type="button" data-tcpagar="1">Ya pagué la tarjeta ('+mx2(suma(cp))+')</button>';
+  else h+='<div class="nota">Nada pendiente. Para marcar una compra como crédito: al capturarla por voz di «con crédito», o edítala y en «¿Cómo pagaste?» elige tarjeta de crédito.</div>';
+  abrirHoja(h);
+}
+function guardarTarjeta(){ var f=val("tc-fecha"); D.estado.credito.fecha_pago=/^\d{4}-\d{2}-\d{2}$/.test(f)?f:""; D.estado.credito.nota=val("tc-nota").trim();
+  guardarLocal(); encolarEstado(); cerrarHojas(); pintar(); toast("Guardado") }
+function pagarTarjeta(){
+  var cp=creditoPendiente(); if(!cp.length) return; var tot=suma(cp);
+  var v=prompt("¿Cuánto pagaste de la tarjeta? (lo que salió de tu BBVA)",String(r2(tot))); if(v===null) return;
+  var n=num(v); if(!n||n<=0) return;
+  cp.forEach(function(m){D.estado.credito.pagados[m.id]=hoyYmd()});
+  D.estado.eventos.push({id:uid(),concepto:"Pago tarjeta de crédito",fecha:hoyYmd(),monto:-r2(n),hecho:sello()});
+  guardarLocal(); encolarEstado(); cerrarHojas(); pintar(); toast("Pago de tarjeta registrado: "+mx2(n));
+}
 /* ---- lo que cobra la IA (sale del mismo saldo de Anthropic que usa EFA) ---- */
 function iaEst(){return D.estado.ia}
 function pesos(usd){return usd*(CFG.tipo_cambio||17.5)}
@@ -1643,7 +1688,7 @@ function enviarIA(texto){
    ===================================================================== */
 var PALABRAS_CAT=[
   ["gasolina",["gasolina","gasolinera","gas del carro","pemex","mobil","shell","oxxo gas","repsol","g500","bp ","tanque","cargue gas","carga de gas"]],
-  ["salud",["farmacia","similares","simi","doctor","medico","medicina","medicamento","consulta","dentista","analisis","laboratorio","pediatra","guadalajara","del ahorro","benavides","san pablo"]],
+  ["salud",["farmacia","proteina","suplemento","creatina","vitaminas","similares","simi","doctor","medico","medicina","medicamento","consulta","dentista","analisis","laboratorio","pediatra","guadalajara","del ahorro","benavides","san pablo"]],
   ["casa",["ferreteria","limpieza","detergente","jabon","garrafon","agua","lavanderia","home depot","foco","pañales","panales","toallitas","bebe","casa"]],
   ["comida",["comida","comi","comer","tienda","abarrotes","fruta","fruteria","verdura","mercado","tortillas","tortilleria","pollo","carne","carniceria","super","soriana","chedraui","walmart","aurrera","despensa","restaurante","fonda","taco","tacos","torta","desayuno","almuerzo","cena","uber eats","rappi","didi food","pizza","sushi","huevo","leche","pan de caja"]],
   ["antojo",["antojo","dulce","postre","helado","cafe","starbucks","oxxo","7 eleven","seven","botana","papas","chela","cerveza","refresco","galletas","pan dulce","panaderia","cine","churro","elote","esquite"]]
@@ -1691,7 +1736,7 @@ function entenderGratis(texto){
   if(!t) return null;
   if(PREGUNTA.test(t)&&!/\d/.test(t.replace(/\?/g,""))) return {pregunta:true};
   if(PREGUNTA.test(t)&&/\?/.test(t)) return {pregunta:true};
-  var acc=[], hoy=hoyYmd(), mk=hoy.slice(0,7), fecha=fechaDicha(t), ef=/\befectivo\b/.test(t);
+  var acc=[], hoy=hoyYmd(), mk=hoy.slice(0,7), fecha=fechaDicha(t), ef=/\befectivo\b/.test(t), cr=/\b(credito|a meses|con la tarjeta de credito)\b/.test(t);
   // saldo del banco
   var sm=t.match(/(saldo|tengo|me quedan|hay)\D{0,25}?(\d+(\.\d+)?)\D{0,15}(banco|bbva|cuenta|disponible)|(saldo|disponible)\D{0,10}(\d+(\.\d+)?)/);
   if(sm){ acc.push({tipo:"poner_saldo",monto:+(sm[2]||sm[6])}); return {acciones:acc} }
@@ -1714,7 +1759,7 @@ function entenderGratis(texto){
     var monto=+nums[nums.length-1]; if(!(monto>0)) return;
     var p=pagoDicho(seg,mk);
     if(p&&Math.abs(p.monto-monto)<=p.monto*0.1){ acc.push({tipo:"palomear",mes:mk,pago_id:p.id,fecha:fecha}); return }
-    acc.push({tipo:"agregar_gasto",monto:monto,categoria:catDe(seg),fecha:fecha,nota:notaDe(seg),efectivo:ef});
+    acc.push({tipo:"agregar_gasto",monto:monto,categoria:catDe(seg),fecha:fecha,nota:notaDe(seg).replace(/\b(Credito|credito|Tarjeta)\b/g,"").trim(),efectivo:ef&&!cr,credito:cr});
   });
   // "pagué spotify" sin monto
   if(!acc.length&&/\b(pague|salio|me cobraron|cobro|ya pague)\b/.test(t)){
@@ -1774,70 +1819,5 @@ $("#iaTxt").addEventListener("keydown",function(e){if(e.key==="Enter"&&!e.shiftK
 try{if(new URLSearchParams(location.search).get("ia"))abrirChat()}catch(e){}
 if("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(function(){});
 </script>
-<!-- AVISO_VERSION_NUEVA: avisa cuando hay una versión publicada más nueva que la que está abierta -->
-<script>
-(function(){
-  try{ if(window.top!==window.self) return; }catch(e){ return; }
-  var PREFIJO_CACHE = 'dinero-';           // cajas propias de esta app que se pueden tirar
-  var CLAVE = 'aviso_ver_' + location.pathname;
-  var ultima = 0, mostrado = false;
-  function tamLocal(){
-    try{ var n = performance.getEntriesByType('navigation')[0]; return n && n.decodedBodySize ? n.decodedBodySize : 0; }catch(e){ return 0; }
-  }
-  function tamServidor(r){
-    var et = r.headers.get('etag') || '';
-    var m = et.match(/-([0-9a-f]+)"?$/i);
-    return m ? parseInt(m[1],16) : 0;
-  }
-  function revisar(){
-    if(mostrado || !navigator.onLine) return;
-    var ahora = Date.now(); if(ahora - ultima < 60000) return; ultima = ahora;
-    try{ if(+sessionStorage.getItem('aviso_callar') > ahora) return; }catch(e){}
-    fetch(location.pathname, {method:'HEAD', cache:'no-store'}).then(function(r){
-      if(!r.ok) return;
-      var srv = tamServidor(r); if(!srv) return;
-      var loc = tamLocal(), base = loc;
-      if(!base){
-        try{ base = +localStorage.getItem(CLAVE) || 0; if(!base){ localStorage.setItem(CLAVE, srv); return; } }catch(e){ return; }
-      }
-      if(srv !== base) pintar(srv);
-    }).catch(function(){});
-  }
-  function actualizar(srv){
-    try{ localStorage.setItem(CLAVE, srv); sessionStorage.setItem('aviso_callar', Date.now()+5*60000); }catch(e){}
-    var pasos = [];
-    if('serviceWorker' in navigator){
-      pasos.push(navigator.serviceWorker.getRegistrations().then(function(rs){ return Promise.all(rs.map(function(g){ return g.update().catch(function(){}); })); }).catch(function(){}));
-    }
-    if(PREFIJO_CACHE && window.caches){
-      pasos.push(caches.keys().then(function(ks){ return Promise.all(ks.filter(function(k){ return k.indexOf(PREFIJO_CACHE)===0; }).map(function(k){ return caches.delete(k); })); }).catch(function(){}));
-    }
-    pasos.push(fetch(location.href, {cache:'reload'}).catch(function(){}));
-    Promise.all(pasos).then(function(){ location.reload(); });
-    setTimeout(function(){ location.reload(); }, 4000);
-  }
-  function pintar(srv){
-    mostrado = true;
-    var b = document.createElement('div');
-    b.id = 'aviso-version';
-    b.setAttribute('role','status');
-    b.style.cssText = 'position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom));'+
-      'z-index:2147483000;display:flex;align-items:center;gap:12px;background:#0E2A5C;color:#F2F7FF;'+
-      'padding:10px 10px 10px 16px;border-radius:999px;box-shadow:0 8px 28px rgba(8,20,48,.35);'+
-      'font:500 14px/1.2 "DM Sans",system-ui,-apple-system,sans-serif;max-width:calc(100vw - 24px);white-space:nowrap';
-    b.innerHTML = '<span>Hay una versión nueva</span>'+
-      '<button type="button" style="font:inherit;font-weight:700;border:0;border-radius:999px;padding:8px 14px;background:#6FA0FF;color:#0A1D40;cursor:pointer">Actualizar</button>'+
-      '<button type="button" aria-label="Ahora no" style="font:inherit;border:0;background:none;color:#BCD3FF;font-size:18px;padding:0 6px;cursor:pointer">×</button>';
-    var bs = b.querySelectorAll('button');
-    bs[0].onclick = function(){ bs[0].textContent = 'Cargando…'; actualizar(srv); };
-    bs[1].onclick = function(){ b.remove(); mostrado = false; try{ sessionStorage.setItem('aviso_callar', Date.now()+30*60000); }catch(e){} };
-    document.body.appendChild(b);
-  }
-  setTimeout(revisar, 3000);
-  document.addEventListener('visibilitychange', function(){ if(document.visibilityState==='visible') revisar(); });
-  window.addEventListener('focus', revisar);
-})();
-</script>
-
 </body>
 </html>
